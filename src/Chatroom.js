@@ -120,12 +120,31 @@ export const Chatroom = (props) => {
     }, [])
 
     const onSubmitMessage = async (message) => {
+
+        // Submit the new messsage
         const newMessageResponse = await newMessageApi(activeChatroomId, props.username, message);
+
+        // Update the display with current versions of the affected API data
         if (Object.keys(newMessageResponse).length) {
+
+            // Fetch an up-to-date collection of messages for this chatroom
             let updatedAllMessages = JSON.parse(JSON.stringify(messages)); 
             let updatedRoomMessages = await messagesApi(activeChatroomId);
             updatedAllMessages[activeChatroomId] = updatedRoomMessages;
             setMessages(updatedAllMessages);
+
+            // Fetch an up-to-date collection of users for this chatroom
+            let updatedAllChatrooms = JSON.parse(JSON.stringify(chatrooms)); 
+            let updatedRoomInfo = await roomsDetailApi(activeChatroomId);
+            updatedAllChatrooms.map( (roomInfo, idx) => {
+                if (roomInfo.id === activeChatroomId) {
+                    updatedAllChatrooms[idx] = updatedRoomInfo;
+                } else {
+                    return roomInfo;
+                }
+            })
+            setChatrooms(updatedAllChatrooms);
+
         }
     }
 
