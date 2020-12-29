@@ -95,6 +95,10 @@ input {
     text-align: center;
 }
 
+#room-header .active {
+    color: #eb1700;
+}
+
 #room-content {
     grid-area: content-area;
     background-color: #edeff0;

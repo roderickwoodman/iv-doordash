@@ -13,7 +13,7 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const sanitizedUsername = usernameInput.replace(/[^A-Za-z]/ig, '')
+        const sanitizedUsername = usernameInput.replace(/[^A-Za-z ]/ig, '')
         if (sanitizedUsername.length) {
             props.onSubmit(sanitizedUsername);
         } else {

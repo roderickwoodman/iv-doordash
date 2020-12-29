@@ -29,7 +29,10 @@ const RoomHeader = (props) => {
             <h2>{props.name}</h2>
             <p>
                 {props.users.map( (user,i) =>
-                    <span key={i}>{user}&nbsp;</span>
+                    <span key={i}>
+                        <span className={(user === props.user) ? 'active' : null}>{user}</span>
+                        <span>{(i !== props.users.length) ? ', ' : ' '}</span>
+                    </span>
                 )}
             </p>
         </section>
