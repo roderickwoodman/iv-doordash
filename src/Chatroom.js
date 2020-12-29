@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { roomsListApi } from './Api.js'
 
 export const Chatroom = (props) => {
 
     const [chatrooms, setChatrooms] = useState([]);
 
     useEffect( () => {
-        const getRoomList = () => {
-            const hardcodedRoomList = [
-                { id: 1, name: 'Analytics'},
-                { id: 2, name: 'Business'},
-                { id: 3, name: 'Design'},
-                { id: 4, name: 'Engineering'},
-                { id: 5, name: 'HR'},
-                { id: 6, name: 'Operations'},
-                { id: 7, name: 'Special Ops'},
-            ];
-            return hardcodedRoomList;
-            // FIXME: do RoomList API here
+        const getRoomList = async () => {
+            let response = await roomsListApi();
+            setChatrooms(response);
         }
-        setChatrooms(getRoomList());
+        getRoomList()
     }, [])
 
     return (
