@@ -29,7 +29,7 @@ const RoomHeader = (props) => {
             <h2>{props.name}</h2>
             <p>
                 {props.users.map( (user,i) =>
-                    <span key={i}>{user}#&nbsp;</span>
+                    <span key={i}>{user}&nbsp;</span>
                 )}
             </p>
         </section>
@@ -119,7 +119,7 @@ export const Chatroom = (props) => {
         const activeRoom = chatrooms.filter( room => room.id === activeChatroomId )[0];
 
         return (
-            <div className="chatroom">
+            <div id="chatroom">
                 <RoomNav 
                     user={props.username} 
                     allRooms={chatrooms} 
