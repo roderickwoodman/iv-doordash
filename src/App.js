@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './App.css';
+import { Chatroom } from './Chatroom'
 
 export const App = () => {
 
@@ -24,10 +25,7 @@ export const App = () => {
         );
     } else {
         return (
-            // FIXME: replace with the TBI Chatroom component
-            <div className="App">
-                <p>Joined chatroom as "{username}"</p>
-            </div>
+            <Chatroom username={username} />
         );
     }
 }
