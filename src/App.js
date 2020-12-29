@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import './App.css';
 import { Chatroom } from './Chatroom'
 
-export const App = () => {
+const Login = (props) => {
 
     const [usernameInput, setUsernameInput] = useState('');
-    const [username, setUsername] = useState(null);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -13,15 +12,28 @@ export const App = () => {
     }
 
     const handleSubmit = (event) => {
-        setUsername(usernameInput);
+        props.onSubmit(usernameInput);
+    }
+
+    return(
+        <div id="login">
+            <input size="30" value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
+            <button onClick={handleSubmit}>Join the DoorDash Chat!</button>
+        </div>
+    )
+}
+
+export const App = () => {
+
+    const [username, setUsername] = useState(null);
+
+    const onSubmit = (username) => {
+        setUsername(username);
     }
 
     if (username === null) {
         return (
-            <div className="App">
-                <input size="30" value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
-                <button onClick={handleSubmit}>Join the DoorDash Chat!</button>
-            </div>
+            <Login onSubmit={onSubmit} />
         );
     } else {
         return (
