@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { roomsListApi, roomsDetailApi, messagesApi } from './Api.js'
 
-// PROPS: user, rooms, activeRoom
+// PROPS: user, allRooms, activeRoomId
 const RoomNav = (props) => {
     return (
         <section id="room-nav">
@@ -9,8 +9,13 @@ const RoomNav = (props) => {
                 <p>{props.user}</p>
             </div>
             <ul id="room-list">
-                { props.rooms.map( (room,i) =>
-                    <li key={i}>{room.name}</li>
+                { props.allRooms.map( (room,i) =>
+                    <li 
+                        key={i} 
+                        data-roomid={room.id}
+                        className={(room.id === props.activeRoomId) ? 'active' : null}
+                        onClick={props.onRoomClick}
+                            >{room.name}</li>
                 )}
             </ul>
         </section>
@@ -103,19 +108,23 @@ export const Chatroom = (props) => {
         // FIXME: do POST API call here
     }
 
+    const onRoomClick = (event) => {
+        setActiveChatroomId(parseInt(event.target.getAttribute('data-roomid')));
+    }
+
     if (!loading 
         && chatrooms.length 
         && Object.keys(messages).length) {
 
-        const roomNames = chatrooms.map( room => room.name );
         const activeRoom = chatrooms.filter( room => room.id === activeChatroomId )[0];
 
         return (
             <div className="chatroom">
                 <RoomNav 
                     user={props.username} 
-                    rooms={roomNames} 
-                    activeRoom={activeChatroomId}
+                    allRooms={chatrooms} 
+                    activeRoomId={activeChatroomId}
+                    onRoomClick={onRoomClick}
                     />
                 <RoomHeader 
                     user={props.username} 
