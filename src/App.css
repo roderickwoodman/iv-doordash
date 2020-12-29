@@ -5,12 +5,40 @@
     padding: 0;
 }
 
+
+/* Common Elements */
+
 ul {
     list-style: none;
 }
 
 
-/* Chatroom regions */
+/* Login Layout */
+
+#login {
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login form {
+    width: 20rem;
+}
+
+#login form * {
+    width: 100%;
+}
+
+#login button {
+    background-color: #eb1700;
+    color: white;
+}
+
+
+/* Chatroom Layout */
 
 #chatroom {
     background-color: #edeff0;

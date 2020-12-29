@@ -17,8 +17,10 @@ const Login = (props) => {
 
     return(
         <div id="login">
-            <input size="30" value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
-            <button onClick={handleSubmit}>Join the DoorDash Chat!</button>
+            <form>
+                <input size="30" value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
+                <button onClick={handleSubmit}>Join the DoorDash Chat!</button>
+            </form>
         </div>
     )
 }
