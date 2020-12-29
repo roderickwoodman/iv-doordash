@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './App.css';
 import { Chatroom } from './Chatroom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Login = (props) => {
 
@@ -18,7 +19,7 @@ const Login = (props) => {
     return(
         <div id="login">
             <form>
-                <input size="30" value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
+                <input value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
                 <button onClick={handleSubmit}>Join the DoorDash Chat!</button>
             </form>
         </div>

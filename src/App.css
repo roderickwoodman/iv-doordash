@@ -12,6 +12,20 @@ ul {
     list-style: none;
 }
 
+li, p {
+    padding: 0.25rem 1rem;
+}
+
+input, button {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+input {
+    border-radius: 0.25rem;
+    border: 1px solid silver;
+}
+
 
 /* Login Layout */
 
@@ -25,7 +39,12 @@ ul {
 }
 
 #login form {
+    height: 7rem;
     width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #login form * {
@@ -35,6 +54,8 @@ ul {
 #login button {
     background-color: #eb1700;
     color: white;
+    border-radius: 0.25rem;
+    border-color: transparent;
 }
 
 
@@ -45,7 +66,7 @@ ul {
     height: 100vh;
     display: grid;
     grid-template-columns: 12rem auto;
-    grid-template-rows: 6rem auto 50px;
+    grid-template-rows: 7rem auto 5rem;
     grid-template-areas:
         "nav-area header-area"
         "nav-area content-area"
@@ -56,7 +77,11 @@ ul {
     grid-area: nav-area;
     background-color: #eb1700;
     color: white;
+}
+
+#room-nav #me {
     text-align: center;
+    font-weight: 800;
 }
 
 #room-nav .active {
@@ -66,6 +91,7 @@ ul {
 #room-header {
     grid-area: header-area;
     background-color: white;
+    padding: 1rem;
     text-align: center;
 }
 
@@ -77,4 +103,18 @@ ul {
 #room-content-input {
     grid-area: footer-area;
     background-color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#room-content-input input {
+    flex: 1 1 90%;
+    margin: 0.25rem;
+}
+
+#room-content-input button {
+    flex: 0 0 10%;
+    margin: 0.25rem;
 }
