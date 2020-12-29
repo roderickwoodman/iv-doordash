@@ -63,6 +63,7 @@ const RoomContentInput = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setMessage('');
         props.onSubmitMessage(message);
     }
 
@@ -138,7 +139,7 @@ export const Chatroom = (props) => {
             let updatedRoomInfo = await roomsDetailApi(activeChatroomId);
             updatedAllChatrooms.map( (roomInfo, idx) => {
                 if (roomInfo.id === activeChatroomId) {
-                    updatedAllChatrooms[idx] = updatedRoomInfo;
+                    return updatedAllChatrooms[idx] = updatedRoomInfo;
                 } else {
                     return roomInfo;
                 }

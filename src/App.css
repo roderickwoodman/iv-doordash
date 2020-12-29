@@ -1,16 +1,31 @@
 /* Normalize */
 
-* {
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     margin: 0;
     padding: 0;
+    font-weight: normal;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 
 /* Common Elements */
-
-ul {
-    list-style: none;
-}
 
 li, p {
     padding: 0.25rem 1rem;
@@ -66,7 +81,7 @@ input {
     height: 100vh;
     display: grid;
     grid-template-columns: 12rem auto;
-    grid-template-rows: 7rem auto 5rem;
+    grid-template-rows: 7rem calc(100vh-12rem) 5rem;
     grid-template-areas:
         "nav-area header-area"
         "nav-area content-area"
@@ -102,11 +117,13 @@ input {
 #room-content {
     grid-area: content-area;
     background-color: #edeff0;
+    overflow-y: scroll;
 }
 
 #room-content-input {
     grid-area: footer-area;
     background-color: white;
+    max-height: 5rem;
     padding: 1rem;
     display: flex;
     flex-direction: row;
