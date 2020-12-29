@@ -8,19 +8,24 @@ const Login = (props) => {
     const [usernameInput, setUsernameInput] = useState('');
 
     const handleChange = (event) => {
-        event.preventDefault();
         setUsernameInput(event.target.value);
     }
 
     const handleSubmit = (event) => {
-        props.onSubmit(usernameInput);
+        event.preventDefault();
+        const sanitizedUsername = usernameInput.replace(/[^A-Za-z]/ig, '')
+        if (sanitizedUsername.length) {
+            props.onSubmit(sanitizedUsername);
+        } else {
+            setUsernameInput('');
+        }
     }
 
     return(
         <div id="login">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
-                <button onClick={handleSubmit}>Join the DoorDash Chat!</button>
+                <button type="submit">Join the DoorDash Chat!</button>
             </form>
         </div>
     )
