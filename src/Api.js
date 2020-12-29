@@ -13,3 +13,11 @@ export const roomsDetailApi = (roomId) => {
         .then( response => response.json() )
     )
 }
+
+// Messages API
+export const messagesApi = (roomId) => {
+    return (
+        fetch(`http://localhost:8080/api/rooms/${roomId}/messages`)
+        .then( response => response.json() )
+    )
+}
