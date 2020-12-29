@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const App = () => {
 
-export default App;
+    const [usernameInput, setUsernameInput] = useState('');
+    const [username, setUsername] = useState(null);
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        setUsernameInput(event.target.value);
+    }
+
+    const handleSubmit = (event) => {
+        setUsername(usernameInput);
+    }
+
+    if (username === null) {
+        return (
+            <div className="App">
+                <input size="30" value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
+                <button onClick={handleSubmit}>Join the DoorDash Chat!</button>
+            </div>
+        );
+    } else {
+        return (
+            // FIXME: replace with the TBI Chatroom component
+            <div className="App">
+                <p>Joined chatroom as "{username}"</p>
+            </div>
+        );
+    }
+}
