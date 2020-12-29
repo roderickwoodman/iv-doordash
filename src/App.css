@@ -120,6 +120,40 @@ input {
     overflow-y: scroll;
 }
 
+#message-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+#room-content li {
+    margin: 0.25rem;
+    width: 100%;
+}
+
+#room-content .message {
+    background-color: white;
+    width: fit-content;
+    max-width: 75%;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+}
+
+#room-content .name {
+    font-size: 0.85rem;
+}
+
+#message-list > li.mine {
+    text-align: left;
+    align-self: flex-end;
+}
+
+#room-content li.mine .message {
+    background-color: #eb1700;
+    color: white;
+}
+
 #room-content-input {
     grid-area: footer-area;
     background-color: white;
