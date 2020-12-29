@@ -1,10 +1,65 @@
 import React, { useState, useEffect } from 'react'
 import { roomsListApi, roomsDetailApi, messagesApi } from './Api.js'
 
+// PROPS: user, rooms, activeRoom
+const RoomNav = (props) => {
+    return (
+        <section id="room-nav">
+            <div id="me">
+                <p>{props.user}</p>
+            </div>
+            <ul id="room-list">
+                { props.rooms.map( (room,i) =>
+                    <li key={i}>{room.name}</li>
+                )}
+            </ul>
+        </section>
+    )
+}
+
+// PROPS: user, name, users
+const RoomHeader = (props) => {
+    return (
+        <section id="room-header">
+            <h2>{props.name}</h2>
+            <p>
+                {props.users.map( (user,i) =>
+                    <span key={i}>{user}#&nbsp;</span>
+                )}
+            </p>
+        </section>
+    )
+}
+
+// PROPS: user, messages
+const RoomContent = (props) => {
+    return (
+        <section id="room-content">
+            <ul>
+                {props.messages.map( (message,i) =>
+                    <li key={i}>[{message.name}] {message.message}</li>
+                )}
+            </ul>
+        </section>
+    )
+}
+
+// PROPS: onSubmitMessage
+const RoomContentInput = (props) => {
+    return (
+        <section id="room-content-input">
+            <input placeholder="Type a message..." />
+            <button>Send</button>
+        </section>
+    )
+}
+
 export const Chatroom = (props) => {
 
+    const [loading, setLoading] = useState(true);
     const [chatrooms, setChatrooms] = useState([]);
     const [messages, setMessages] = useState([]);
+    const [activeChatroomId, setActiveChatroomId] = useState(0);
 
     // Initialize the room info from API data
     useEffect( () => {
@@ -41,21 +96,49 @@ export const Chatroom = (props) => {
 
         }
         initRoomInfo()
+        .then(setLoading(false));
     }, [])
 
-    return (
-        <div className="chatroom">
-            <section className="nav">
-                { chatrooms.map( (chatroom,i) =>
-                    <p key={i}>[#{chatroom.id}] {chatroom.name}: 
-                        { chatroom.users.map( (user, j) => 
-                        <span key={j}>{user}&nbsp;</span>
-                        )}
-                    </p>
-                )}
-            </section>
-        </div>
-    );
+    const onSubmitMessage = (messageContent) => {
+        // FIXME: do POST API call here
+    }
+
+    if (!loading 
+        && chatrooms.length 
+        && Object.keys(messages).length) {
+
+        const roomNames = chatrooms.map( room => room.name );
+        const activeRoom = chatrooms.filter( room => room.id === activeChatroomId )[0];
+
+        return (
+            <div className="chatroom">
+                <RoomNav 
+                    user={props.username} 
+                    rooms={roomNames} 
+                    activeRoom={activeChatroomId}
+                    />
+                <RoomHeader 
+                    user={props.username} 
+                    name={activeRoom.name} 
+                    users={activeRoom.users} 
+                    />
+                <RoomContent
+                    user={props.username} 
+                    messages={messages[activeChatroomId]}
+                    />
+                <RoomContentInput
+                    onSubmitMessage={onSubmitMessage}
+                    />
+            </div>
+        )
+
+    } else {
+
+        return (
+            <div>Loading...</div>
+        )
+
+    }
 }
 
 // FIXME: add PropTypes checking here
