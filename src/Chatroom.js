@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { roomsListApi, roomsDetailApi, messagesApi } from './Api.js'
+import { roomsListApi, roomsDetailApi, messagesApi, newMessageApi } from './Api.js'
 
 // PROPS: user, allRooms, activeRoomId
 const RoomNav = (props) => {
@@ -31,7 +31,7 @@ const RoomHeader = (props) => {
                 {props.users.map( (user,i) =>
                     <span key={i}>
                         <span className={(user === props.user) ? 'active' : null}>{user}</span>
-                        <span>{(i !== props.users.length) ? ', ' : ' '}</span>
+                        <span>{(i !== props.users.length - 1) ? ', ' : ' '}</span>
                     </span>
                 )}
             </p>
@@ -54,11 +54,23 @@ const RoomContent = (props) => {
 
 // PROPS: onSubmitMessage
 const RoomContentInput = (props) => {
+
+    const [message, setMessage] = useState('');
+
+    const handleChange = (event) => {
+        setMessage(event.target.value);
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        props.onSubmitMessage(message);
+    }
+
     return (
-        <section id="room-content-input">
-            <input placeholder="Type a message..." />
-            <button>Send</button>
-        </section>
+        <form id="room-content-input" onSubmit={handleSubmit}>
+            <input placeholder="Type a message..." value={message} onChange={handleChange} />
+            <button type="submit">Send</button>
+        </form>
     )
 }
 
@@ -107,8 +119,14 @@ export const Chatroom = (props) => {
         .then(setLoading(false));
     }, [])
 
-    const onSubmitMessage = (messageContent) => {
-        // FIXME: do POST API call here
+    const onSubmitMessage = async (message) => {
+        const newMessageResponse = await newMessageApi(activeChatroomId, props.username, message);
+        if (Object.keys(newMessageResponse).length) {
+            let updatedAllMessages = JSON.parse(JSON.stringify(messages)); 
+            let updatedRoomMessages = await messagesApi(activeChatroomId);
+            updatedAllMessages[activeChatroomId] = updatedRoomMessages;
+            setMessages(updatedAllMessages);
+        }
     }
 
     const onRoomClick = (event) => {
