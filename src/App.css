@@ -94,8 +94,8 @@ input {
     color: white;
 }
 
-#room-nav #me {
-    text-align: center;
+#room-nav #me p {
+    font-size: 1.5rem;
     font-weight: 800;
 }
 

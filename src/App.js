@@ -15,7 +15,14 @@ const Login = (props) => {
         event.preventDefault();
         const sanitizedUsername = usernameInput.replace(/[^A-Za-z ]/ig, '')
         if (sanitizedUsername.length) {
-            props.onSubmit(sanitizedUsername);
+            const now = new Date().getTime();
+            console.log('now:',now);
+            const newUser = {
+                name: sanitizedUsername,
+                session: now,
+            }
+            console.log('newUser:',newUser);
+            props.onSubmit(newUser);
         } else {
             setUsernameInput('');
         }
@@ -33,19 +40,19 @@ const Login = (props) => {
 
 export const App = () => {
 
-    const [username, setUsername] = useState(null);
+    const [newUser, setNewUser] = useState(null);
 
-    const onSubmit = (username) => {
-        setUsername(username);
+    const onSubmit = (newUser) => {
+        setNewUser(newUser);
     }
 
-    if (username === null) {
+    if (newUser === null) {
         return (
             <Login onSubmit={onSubmit} />
         );
     } else {
         return (
-            <Chatroom username={username} />
+            <Chatroom user={newUser} />
         );
     }
 }

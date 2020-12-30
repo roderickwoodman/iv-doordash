@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { roomsListApi, roomsDetailApi, messagesApi, newMessageApi } from './Api.js'
 
-// PROPS: user, allRooms, activeRoomId
+// PROPS: user, session, allRooms, activeRoomId
 const RoomNav = (props) => {
     return (
         <section id="room-nav">
             <div id="me">
                 <p>{props.user}</p>
+                <p>{props.session}</p>
             </div>
             <ul id="room-list">
                 { props.allRooms.map( (room,i) =>
@@ -82,6 +83,7 @@ const RoomContentInput = (props) => {
 
 export const Chatroom = (props) => {
 
+    const [session, setSession] = useState('');
     const [loading, setLoading] = useState(true);
     const [chatrooms, setChatrooms] = useState([]);
     const [messages, setMessages] = useState([]);
@@ -89,6 +91,9 @@ export const Chatroom = (props) => {
 
     // Initialize the room info from API data
     useEffect( () => {
+
+        // const intervalId = window.setInterval();
+        // const update
 
         const initRoomInfo = async () => {
 
@@ -128,7 +133,7 @@ export const Chatroom = (props) => {
     const onSubmitMessage = async (message) => {
 
         // Submit the new messsage
-        const newMessageResponse = await newMessageApi(activeChatroomId, props.username, message);
+        const newMessageResponse = await newMessageApi(activeChatroomId, props.user.name, message);
 
         // Update the display with current versions of the affected API data
         if (Object.keys(newMessageResponse).length) {
@@ -167,18 +172,19 @@ export const Chatroom = (props) => {
         return (
             <div id="chatroom">
                 <RoomNav 
-                    user={props.username} 
+                    user={props.user.name} 
+                    session={session} 
                     allRooms={chatrooms} 
                     activeRoomId={activeChatroomId}
                     onRoomClick={onRoomClick}
                     />
                 <RoomHeader 
-                    user={props.username} 
+                    user={props.user.name} 
                     name={activeRoom.name} 
                     users={activeRoom.users} 
                     />
                 <RoomContent
-                    user={props.username} 
+                    user={props.user.name} 
                     messages={messages[activeChatroomId]}
                     />
                 <RoomContentInput
