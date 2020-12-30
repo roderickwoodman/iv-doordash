@@ -36,6 +36,7 @@ const RoomHeader = (props) => {
                     </span>
                 )}
             </p>
+            <button id="logout-button" onClick={props.onLogout}>logout</button>
         </section>
     )
 }
@@ -137,6 +138,9 @@ export const Chatroom = (props) => {
             })
             setMessages(allMessages);
 
+            // Force chat window to the bottom
+            scrollToBottom();
+
         }
         initRoomInfo()
         .then(setLoading(false));
@@ -144,6 +148,13 @@ export const Chatroom = (props) => {
         return () => clearInterval(intervalId);
 
     }, [props.user.sessionStart]);
+
+    const scrollToBottom = () => {
+
+        const chatElement = document.getElementById('room-content');
+        chatElement.scrollTop = chatElement.scrollHeight;
+
+    }
 
     const onSubmitMessage = async (message) => {
 
@@ -171,9 +182,6 @@ export const Chatroom = (props) => {
             })
             setChatrooms(updatedAllChatrooms);
 
-            // Force chat window to the bottom
-            const chatElement = document.getElementById('room-content');
-            chatElement.scrollTop = chatElement.scrollHeight;
 
         }
     }
@@ -201,6 +209,7 @@ export const Chatroom = (props) => {
                     user={props.user.name} 
                     name={activeRoom.name} 
                     users={activeRoom.users} 
+                    onLogout={props.onLogout}
                     />
                 <RoomContent
                     user={props.user.name} 

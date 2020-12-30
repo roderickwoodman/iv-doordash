@@ -28,6 +28,9 @@ const Login = (props) => {
 
     return(
         <div id="login">
+            { props.afterLogout &&
+            <p>You have been logged out.</p>
+            }
             <form onSubmit={handleSubmit}>
                 <input value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
                 <button type="submit">Join the DoorDash Chat!</button>
@@ -39,18 +42,24 @@ const Login = (props) => {
 export const App = () => {
 
     const [newUser, setNewUser] = useState(null);
+    const [afterLogout, setAfterLogout] = useState(false);
 
     const onSubmit = (newUser) => {
         setNewUser(newUser);
     }
 
+    const onLogout = () => {
+        setNewUser(null);
+        setAfterLogout(true);
+    }
+
     if (newUser === null) {
         return (
-            <Login onSubmit={onSubmit} />
+            <Login onSubmit={onSubmit} afterLogout={afterLogout}/>
         );
     } else {
         return (
-            <Chatroom user={newUser} />
+            <Chatroom user={newUser} onLogout={onLogout} />
         );
     }
 }

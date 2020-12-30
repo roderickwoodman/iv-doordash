@@ -179,7 +179,8 @@ input {
     margin: 0.25rem;
 }
 
-#send-button {
+#send-button,
+#logout-button {
     background-color: transparent;
     color: blue;
     border: 2px solid transparent;
@@ -190,4 +191,17 @@ input {
 #send-button:hover {
     background-color: #edeff0;
     border: 2px solid blue;
+}
+
+#logout-button {
+    color: black;
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+    /* border-radius: 2rem; */
+}
+
+#logout-button:hover {
+    background-color: #edeff0;
+    border: 2px solid black;
 }
