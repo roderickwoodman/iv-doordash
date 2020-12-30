@@ -178,3 +178,16 @@ input {
     flex: 0 0 10%;
     margin: 0.25rem;
 }
+
+#send-button {
+    background-color: transparent;
+    color: blue;
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    font-weight: 600;
+}
+
+#send-button:hover {
+    background-color: #edeff0;
+    border: 2px solid blue;
+}

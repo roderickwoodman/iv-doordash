@@ -78,7 +78,7 @@ const RoomContentInput = (props) => {
     return (
         <form id="room-content-input" onSubmit={handleSubmit}>
             <input placeholder="Type a message..." value={message} onChange={handleChange} />
-            <button type="submit">Send</button>
+            <button id="send-button" type="submit">Send</button>
         </form>
     )
 }
