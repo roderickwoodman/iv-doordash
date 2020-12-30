@@ -150,7 +150,7 @@ export const Chatroom = (props) => {
         // Submit the new messsage
         const newMessageResponse = await newMessageApi(activeChatroomId, props.user.name, message);
 
-        // Update the display with current versions of the affected API data
+        // This new message requires the following data/display updates
         if (Object.keys(newMessageResponse).length) {
 
             // Fetch an up-to-date collection of messages for this chatroom
@@ -170,6 +170,10 @@ export const Chatroom = (props) => {
                 }
             })
             setChatrooms(updatedAllChatrooms);
+
+            // Force chat window to the bottom
+            const chatElement = document.getElementById('room-content');
+            chatElement.scrollTop = chatElement.scrollHeight;
 
         }
     }
