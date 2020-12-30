@@ -88,120 +88,126 @@ input {
         "nav-area footer-area";
 }
 
-#room-nav {
-    grid-area: nav-area;
-    background-color: #eb1700;
-    color: white;
-}
+    /* nav */
 
-#room-nav #me .name {
-    font-size: 1.5rem;
-    font-weight: 800;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
+    #room-nav {
+        grid-area: nav-area;
+        background-color: #eb1700;
+        color: white;
+    }
 
-#room-nav #me .session {
-    font-size: 0.85rem;
-}
+    #room-nav #me .name {
+        font-size: 1.5rem;
+        font-weight: 800;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
 
-#room-nav .active {
-    background-color: #751520;
-}
+    #room-nav #me .session {
+        font-size: 0.85rem;
+    }
 
-#room-header {
-    grid-area: header-area;
-    background-color: white;
-    padding: 1rem;
-    text-align: center;
-}
+    #room-nav .active {
+        background-color: #751520;
+    }
 
-#room-header .active {
-    color: #eb1700;
-}
+    /* header */
 
-#room-content {
-    grid-area: content-area;
-    background-color: #edeff0;
-    overflow-y: scroll;
-}
+    #room-header {
+        grid-area: header-area;
+        background-color: white;
+        padding: 1rem;
+        text-align: center;
+    }
 
-#message-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    #room-header .active {
+        color: #eb1700;
+    }
 
-}
+    /* content */
 
-#message-list li {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin: 0.25rem;
-}
+    #room-content {
+        grid-area: content-area;
+        background-color: #edeff0;
+        overflow-y: scroll;
+    }
 
-#message-list li.mine {
-    justify-content: flex-end;
-}
+    #message-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 
-#message-list .message {
-    background-color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
-}
+    #message-list li {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin: 0.25rem;
+    }
 
-#message-list li.mine .message {
-    background-color: #eb1700;
-    color: white;
-}
+    #message-list li.mine {
+        justify-content: flex-end;
+    }
 
-#message-list .name {
-    font-size: 0.85rem;
-}
+    #message-list .message {
+        background-color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+    }
 
-#room-content-input {
-    grid-area: footer-area;
-    background-color: white;
-    max-height: 5rem;
-    padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
+    #message-list li.mine .message {
+        background-color: #eb1700;
+        color: white;
+    }
 
-#room-content-input input {
-    flex: 1 1 90%;
-    margin: 0.25rem;
-}
+    #message-list .name {
+        font-size: 0.85rem;
+    }
 
-#room-content-input button {
-    flex: 0 0 10%;
-    margin: 0.25rem;
-}
+    #room-content-input {
+        grid-area: footer-area;
+        background-color: white;
+        max-height: 5rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
 
-#send-button,
-#logout-button {
-    background-color: transparent;
-    color: blue;
-    border: 2px solid transparent;
-    border-radius: 1rem;
-    font-weight: 600;
-}
+    /* footer */
 
-#send-button:hover {
-    background-color: #edeff0;
-    border: 2px solid blue;
-}
+    #room-content-input input {
+        flex: 1 1 90%;
+        margin: 0.25rem;
+    }
 
-#logout-button {
-    color: black;
-    position: fixed;
-    top: 0.5rem;
-    right: 0.5rem;
-    /* border-radius: 2rem; */
-}
+    #room-content-input button {
+        flex: 0 0 10%;
+        margin: 0.25rem;
+    }
 
-#logout-button:hover {
-    background-color: #edeff0;
-    border: 2px solid black;
-}
+    #send-button,
+    #logout-button {
+        background-color: transparent;
+        color: blue;
+        border: 2px solid transparent;
+        border-radius: 1rem;
+        font-weight: 600;
+    }
+
+    #send-button:hover {
+        background-color: #edeff0;
+        border: 2px solid blue;
+    }
+
+    #logout-button {
+        color: black;
+        position: fixed;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    #logout-button:hover {
+        background-color: #edeff0;
+        border: 2px solid black;
+    }

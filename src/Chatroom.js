@@ -25,11 +25,24 @@ const RoomNav = (props) => {
 
 // PROPS: user, name, users
 const RoomHeader = (props) => {
+    const sortedUsers = props.users.sort( (a,b) => {
+        if (a === props.user) {
+            return -1;
+        } else if (b === props.user) {
+            return 1;
+        } else if (a < b) {
+            return -1;
+        } else if (a > b) {
+            return 1;
+        } else {
+            return 0;
+        }
+    })
     return (
         <section id="room-header">
             <h2>{props.name}</h2>
             <p>
-                {props.users.map( (user,i) =>
+                {sortedUsers.map( (user,i) =>
                     <span key={i}>
                         <span className={(user === props.user) ? 'active' : null}>{user}</span>
                         <span>{(i !== props.users.length - 1) ? ', ' : ' '}</span>
