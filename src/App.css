@@ -211,3 +211,11 @@ input {
         background-color: #edeff0;
         border: 2px solid black;
     }
+
+
+/* Miscellaneous */
+
+.status {
+    padding: 1rem;
+}
+

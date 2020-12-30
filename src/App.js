@@ -11,16 +11,19 @@ const Login = (props) => {
         setUsernameInput(event.target.value);
     }
 
+    // Valid usernames are at least 3 characters of alphas and spaces only
     const handleSubmit = (event) => {
         event.preventDefault();
-        const sanitizedUsername = usernameInput.replace(/[^A-Za-z ]/ig, '')
-        if (sanitizedUsername.length) {
+        const sanitizedUsername = usernameInput.replace(/[^A-Za-z ]/ig, '').trim();
+        if (sanitizedUsername.length > 2) {
             const now = new Date().getTime();
             const newUser = {
                 name: sanitizedUsername,
                 sessionStart: now,
             }
             props.onSubmit(newUser);
+        } else if (sanitizedUsername.length > 0) {
+            setUsernameInput(sanitizedUsername);
         } else {
             setUsernameInput('');
         }
@@ -61,6 +64,7 @@ export const App = () => {
 
     const onLogout = () => {
         localStorage.removeItem('user');
+        localStorage.removeItem('activeChatroomId');
         setNewUser(null);
         setAfterLogout(true);
     }

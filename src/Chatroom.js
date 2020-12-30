@@ -25,10 +25,12 @@ const RoomNav = (props) => {
 
 // PROPS: user, name, users
 const RoomHeader = (props) => {
-    const sortedUsers = props.users.sort( (a,b) => {
-        if (a === props.user) {
+    const sortedUsers = props.users.sort( (A,B) => {
+        const a = A.toLowerCase();
+        const b = B.toLowerCase();
+        if (a === props.user.toLowerCase()) {
             return -1;
-        } else if (b === props.user) {
+        } else if (b === props.user.toLowerCase()) {
             return 1;
         } else if (a < b) {
             return -1;
@@ -97,6 +99,34 @@ const RoomContentInput = (props) => {
     )
 }
 
+const Loading = (props) => {
+
+    const [dots, setDots] = useState('...');
+
+    useEffect( () => {
+
+        // Begin timing the current session
+        const intervalId = setInterval( () => {
+            const now = new Date().getTime();
+            const deltaSecs = Math.floor((now - parseInt(props.sessionStart)) / (1000));
+            setDots('...' + '.'.repeat(deltaSecs));
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+
+    }, [props.sessionStart]);
+
+    return (
+        <div id="chatroom">
+            <section id="room-nav"></section>
+            <section id="room-header"></section>
+            <section id="room-content">
+                <div className="status">Fetching chatroom data{dots}</div>
+            </section>
+        </div>
+    )
+}
+
 export const Chatroom = (props) => {
 
     const [session, setSession] = useState('Online for < 1 minute');
@@ -152,7 +182,9 @@ export const Chatroom = (props) => {
             if (storedActiveChatroomId !== null) {
                 setActiveChatroomId(storedActiveChatroomId);
             } else if (roomListResponse.length) {
-                setActiveChatroomId(roomListResponse[0].id)
+                const roomId = roomListResponse[0].id;
+                localStorage.setItem('activeChatroomId', JSON.stringify(roomId));
+                setActiveChatroomId(roomId);
             }
 
             // Force the chat window to the bottom
@@ -210,7 +242,7 @@ export const Chatroom = (props) => {
         setActiveChatroomId(newActiveChatroomId);
     }
 
-    if (!loading 
+    if (!loading
         && chatrooms.length 
         && Object.keys(messages).length
         && activeChatroomId !== null) {
@@ -245,7 +277,7 @@ export const Chatroom = (props) => {
     } else {
 
         return (
-            <div>Loading...</div>
+            <Loading sessionStart={props.user.sessionStart} />
         )
 
     }
