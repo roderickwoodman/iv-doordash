@@ -46,6 +46,7 @@ export const App = () => {
 
     useEffect( () => {
 
+        // If user info was stored, load it
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (storedUser !== null) {
             setNewUser(storedUser);

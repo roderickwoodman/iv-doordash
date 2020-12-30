@@ -103,7 +103,7 @@ export const Chatroom = (props) => {
     const [loading, setLoading] = useState(true);
     const [chatrooms, setChatrooms] = useState([]);
     const [messages, setMessages] = useState([]);
-    const [activeChatroomId, setActiveChatroomId] = useState(0);
+    const [activeChatroomId, setActiveChatroomId] = useState(null);
 
     useEffect( () => {
 
@@ -123,27 +123,23 @@ export const Chatroom = (props) => {
         // Initialize the room info from API data
         const initRoomInfo = async () => {
 
-            // 1. Collect room IDs
+            // Collect room IDs
             const roomListResponse = await roomsListApi();
 
-            // 2A. For each room, collect room name and users info
+            // For each room, collect and save the room name and users info
             const roomDetailResponses = await Promise.all(
                 roomListResponse.map( function(room) {
                     return roomsDetailApi(room.id);
                 })
             )
-
-            // Save the room ID, room name, and users info in state
             setChatrooms(roomDetailResponses);
 
-            // 2B. For each room, collect messages info
+            // For each room, collect and save the messages info
             const messagesResponses = await Promise.all(
                 roomListResponse.map( function(room) {
                     return messagesApi(room.id);
                 })
             )
-
-            // Save the messages in state, after reattaching room ID from the request
             let allMessages = {};
             messagesResponses.forEach( (resp, idx) => {
                 let roomId = roomListResponse[idx].id;
@@ -151,10 +147,19 @@ export const Chatroom = (props) => {
             })
             setMessages(allMessages);
 
-            // Force chat window to the bottom
+            // Init the active chatroom
+            const storedActiveChatroomId = JSON.parse(localStorage.getItem('activeChatroomId'));
+            if (storedActiveChatroomId !== null) {
+                setActiveChatroomId(storedActiveChatroomId);
+            } else if (roomListResponse.length) {
+                setActiveChatroomId(roomListResponse[0].id)
+            }
+
+            // Force the chat window to the bottom
             scrollToBottom();
 
         }
+
         initRoomInfo()
         .then(setLoading(false));
 
@@ -200,12 +205,15 @@ export const Chatroom = (props) => {
     }
 
     const onRoomClick = (event) => {
-        setActiveChatroomId(parseInt(event.target.getAttribute('data-roomid')));
+        const newActiveChatroomId = parseInt(event.target.getAttribute('data-roomid'));
+        localStorage.setItem('activeChatroomId', JSON.stringify(newActiveChatroomId));
+        setActiveChatroomId(newActiveChatroomId);
     }
 
     if (!loading 
         && chatrooms.length 
-        && Object.keys(messages).length) {
+        && Object.keys(messages).length
+        && activeChatroomId !== null) {
 
         const activeRoom = chatrooms.filter( room => room.id === activeChatroomId )[0];
 
