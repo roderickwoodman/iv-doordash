@@ -129,35 +129,34 @@ input {
 #message-list {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+    justify-content: flex-start;
+
 }
 
-#room-content li {
+#message-list li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     margin: 0.25rem;
-    width: 100%;
 }
 
-#room-content .message {
+#message-list li.mine {
+    justify-content: flex-end;
+}
+
+#message-list .message {
     background-color: white;
-    width: fit-content;
-    max-width: 75%;
     padding: 0.25rem 0.75rem;
     border-radius: 2rem;
 }
 
-#room-content .name {
-    font-size: 0.85rem;
-}
-
-#message-list > li.mine {
-    text-align: left;
-    align-self: flex-end;
-}
-
-#room-content li.mine .message {
+#message-list li.mine .message {
     background-color: #eb1700;
     color: white;
+}
+
+#message-list .name {
+    font-size: 0.85rem;
 }
 
 #room-content-input {

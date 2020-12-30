@@ -47,10 +47,12 @@ const RoomContent = (props) => {
             <ul id="message-list">
                 {props.messages.map( (message,i) =>
                     <li key={i} className={(message.name === props.user) ? 'mine' : null}>
-                        <div className="message">{message.message}</div>
-                        { message.name !== props.user && 
-                        <div className="name">{message.name}</div>
-                        }
+                        <div>
+                            <div className="message">{message.message}</div>
+                            { message.name !== props.user && 
+                            <div className="name">{message.name}</div>
+                            }
+                        </div>
                     </li>
                 )}
             </ul>
