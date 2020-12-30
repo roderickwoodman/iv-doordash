@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import { Chatroom } from './Chatroom'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -44,11 +44,22 @@ export const App = () => {
     const [newUser, setNewUser] = useState(null);
     const [afterLogout, setAfterLogout] = useState(false);
 
+    useEffect( () => {
+
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser !== null) {
+            setNewUser(storedUser);
+        }
+
+    }, [])
+
     const onSubmit = (newUser) => {
+        localStorage.setItem('user', JSON.stringify(newUser));
         setNewUser(newUser);
     }
 
     const onLogout = () => {
+        localStorage.removeItem('user');
         setNewUser(null);
         setAfterLogout(true);
     }
