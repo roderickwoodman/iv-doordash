@@ -94,9 +94,15 @@ input {
     color: white;
 }
 
-#room-nav #me p {
+#room-nav #me .name {
     font-size: 1.5rem;
     font-weight: 800;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#room-nav #me .session {
+    font-size: 0.85rem;
 }
 
 #room-nav .active {

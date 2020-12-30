@@ -6,8 +6,8 @@ const RoomNav = (props) => {
     return (
         <section id="room-nav">
             <div id="me">
-                <p>{props.user}</p>
-                <p>{props.session}</p>
+                <p className="name">{props.user}</p>
+                <p className="session">{props.session}</p>
             </div>
             <ul id="room-list">
                 { props.allRooms.map( (room,i) =>
@@ -83,18 +83,28 @@ const RoomContentInput = (props) => {
 
 export const Chatroom = (props) => {
 
-    const [session, setSession] = useState('');
+    const [session, setSession] = useState('Online for < 1 minute');
     const [loading, setLoading] = useState(true);
     const [chatrooms, setChatrooms] = useState([]);
     const [messages, setMessages] = useState([]);
     const [activeChatroomId, setActiveChatroomId] = useState(0);
 
-    // Initialize the room info from API data
     useEffect( () => {
 
-        // const intervalId = window.setInterval();
-        // const update
+        // Begin timing the current session
+        const intervalId = setInterval( () => {
+            const now = new Date().getTime();
+            const deltaMins = Math.floor((now - parseInt(props.user.sessionStart)) / (1000 * 60));
+            let duration = '< 1 minute';
+            if (deltaMins === 1) {
+                duration = '1 minute';
+            } else if (deltaMins > 1) {
+                duration = `${deltaMins} minutes`;
+            }
+            setSession(`Online for ${duration}`);
+        }, 1000*10);
 
+        // Initialize the room info from API data
         const initRoomInfo = async () => {
 
             // 1. Collect room IDs
@@ -128,7 +138,10 @@ export const Chatroom = (props) => {
         }
         initRoomInfo()
         .then(setLoading(false));
-    }, [])
+
+        return () => clearInterval(intervalId);
+
+    }, [props.user.sessionStart]);
 
     const onSubmitMessage = async (message) => {
 

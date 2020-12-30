@@ -16,12 +16,10 @@ const Login = (props) => {
         const sanitizedUsername = usernameInput.replace(/[^A-Za-z ]/ig, '')
         if (sanitizedUsername.length) {
             const now = new Date().getTime();
-            console.log('now:',now);
             const newUser = {
                 name: sanitizedUsername,
-                session: now,
+                sessionStart: now,
             }
-            console.log('newUser:',newUser);
             props.onSubmit(newUser);
         } else {
             setUsernameInput('');
