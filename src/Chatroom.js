@@ -102,26 +102,44 @@ const RoomContentInput = (props) => {
 const Loading = (props) => {
 
     const [dots, setDots] = useState('...');
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect( () => {
 
         // Begin timing the current session
         const intervalId = setInterval( () => {
             const now = new Date().getTime();
-            const deltaSecs = Math.floor((now - parseInt(props.sessionStart)) / (1000));
-            setDots('...' + '.'.repeat(deltaSecs));
+            const deltaSecs = Math.floor((now - parseInt(props.user.sessionStart)) / (1000));
+            if (deltaSecs < 30) {
+                setDots('...' + '.'.repeat(deltaSecs));
+            } else if (deltaSecs === 30) {
+                setDots('...' + '.'.repeat(30) + 'x');
+            }
+            if (deltaSecs === 10) {
+                setErrorMessage('STATUS: Still working. Please be patient.');
+            } else if (deltaSecs === 20) {
+                setErrorMessage('STATUS: Unexpected delay. Continue to hold a bit more.');
+            } else if (deltaSecs === 30) {
+                setErrorMessage('STATUS: ERROR. Aborting. Please log in again.');
+                localStorage.clear();
+            } else if (deltaSecs > 45) {
+                props.onLogout();
+            }
         }, 1000);
 
         return () => clearInterval(intervalId);
 
-    }, [props.sessionStart]);
+    }, [props, props.user.name, props.user.sessionStart, props.onLogout]);
 
     return (
         <div id="chatroom">
             <section id="room-nav"></section>
             <section id="room-header"></section>
             <section id="room-content">
-                <div className="status">Fetching chatroom data{dots}</div>
+                <div className="status">Welcome, {props.user.name}!</div>
+                <div className="status">Initializing chatroom{dots}</div>
+                <div className="status error">{errorMessage}</div>
+                <button id="logout-button" onClick={props.onLogout}>cancel</button>
             </section>
         </div>
     )
@@ -242,7 +260,7 @@ export const Chatroom = (props) => {
         setActiveChatroomId(newActiveChatroomId);
     }
 
-    if (!loading
+    if (!loading && false
         && chatrooms.length 
         && Object.keys(messages).length
         && activeChatroomId !== null) {
@@ -277,7 +295,7 @@ export const Chatroom = (props) => {
     } else {
 
         return (
-            <Loading sessionStart={props.user.sessionStart} />
+            <Loading user={props.user} onLogout={props.onLogout} />
         )
 
     }

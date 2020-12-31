@@ -63,8 +63,7 @@ export const App = () => {
     }
 
     const onLogout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('activeChatroomId');
+        localStorage.clear();
         setNewUser(null);
         setAfterLogout(true);
     }
