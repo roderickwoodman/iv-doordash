@@ -75,7 +75,8 @@ const Login = (props) => {
             }
             <form onSubmit={handleSubmit}>
                 <div>
-                    <input value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
+                    <label className="hide-element" htmlFor="username">Username:</label>
+                    <input id="username" type="input" value={usernameInput} onChange={handleChange} placeholder="Type your username..." required />
                     <p className={(errorMessage === 'No errors.') ? "error noerrors" : "error"}>{errorMessage}</p>
                 </div>
                 <button type="submit">Join the DoorDash Chat!</button>

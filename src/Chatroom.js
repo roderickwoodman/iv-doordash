@@ -64,7 +64,6 @@ const RoomHeader = (props) => {
                     </span>
                 )}
             </p>
-            <button id="logout-button" onClick={props.onLogout}>logout</button>
         </section>
     )
 }
@@ -73,7 +72,6 @@ RoomHeader.propTypes = {
     username: PropTypes.string.isRequired,
     roomName: PropTypes.string.isRequired,
     users: PropTypes.array.isRequired,
-    onLogout: PropTypes.func.isRequired,
 }
 
 
@@ -118,14 +116,17 @@ const RoomContentInput = (props) => {
 
     return (
         <form id="room-content-input" onSubmit={handleSubmit}>
-            <input placeholder="Type a message..." value={message} onChange={handleChange} />
+            <label className="hide-element" htmlFor="message">New message:</label>
+            <input id="message" type="input" placeholder="Type a message..." value={message} onChange={handleChange} />
             <button id="send-button" type="submit">Send</button>
+            <button id="logout-button" onClick={props.onLogout}>logout</button>
         </form>
     )
 }
 
 RoomContentInput.propTypes = {
     onSubmitMessage: PropTypes.func.isRequired,
+    onLogout: PropTypes.func.isRequired,
 }
 
 
@@ -318,7 +319,6 @@ export const Chatroom = (props) => {
                     username={props.user.name} 
                     roomName={activeRoom.name} 
                     users={activeRoom.users} 
-                    onLogout={props.onLogout}
                     />
                 <RoomContent
                     username={props.user.name} 
@@ -326,6 +326,7 @@ export const Chatroom = (props) => {
                     />
                 <RoomContentInput
                     onSubmitMessage={onSubmitMessage}
+                    onLogout={props.onLogout}
                     />
             </div>
         )
