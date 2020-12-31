@@ -67,15 +67,19 @@ button,
 }
 
 #login form {
-    height: 7rem;
-    width: 20rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    height: 8rem;
+    width: 25rem;
 }
 
-#login form * {
+#login form input {
+    width: 100%;
+}
+
+#login form p.noerrors {
+    color: transparent;
+}
+
+#login form button {
     width: 100%;
 }
 
@@ -247,6 +251,11 @@ button,
 
 .status {
     padding: 0.5rem;
+}
+
+.error {
+    font-size: 0.75rem;
+    color: #eb1700;
 }
 
 
