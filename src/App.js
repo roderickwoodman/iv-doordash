@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import './App.css';
 import { Chatroom } from './Chatroom'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 const Login = (props) => {
 
@@ -41,6 +43,12 @@ const Login = (props) => {
         </div>
     )
 }
+
+Login.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    afterLogout: PropTypes.bool.isRequired,
+}
+
 
 export const App = () => {
 

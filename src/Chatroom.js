@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { roomsListApi, roomsDetailApi, messagesApi, newMessageApi } from './Api.js'
 
-// PROPS: user, session, allRooms, activeRoomId
+
 const RoomNav = (props) => {
     return (
         <section id="room-nav">
             <div id="me">
-                <p className="name">{props.user}</p>
+                <p className="name">{props.username}</p>
                 <p className="session">{props.session}</p>
             </div>
             <ul id="room-list">
@@ -23,14 +24,22 @@ const RoomNav = (props) => {
     )
 }
 
-// PROPS: user, name, users
+RoomNav.propTypes = {
+    username: PropTypes.string.isRequired,
+    session: PropTypes.string.isRequired,
+    allRooms: PropTypes.array.isRequired,
+    activeRoomId: PropTypes.number.isRequired,
+    onRoomClick: PropTypes.func.isRequired,
+}
+
+
 const RoomHeader = (props) => {
     const sortedUsers = props.users.sort( (A,B) => {
         const a = A.toLowerCase();
         const b = B.toLowerCase();
-        if (a === props.user.toLowerCase()) {
+        if (a === props.username.toLowerCase()) {
             return -1;
-        } else if (b === props.user.toLowerCase()) {
+        } else if (b === props.username.toLowerCase()) {
             return 1;
         } else if (a < b) {
             return -1;
@@ -42,11 +51,11 @@ const RoomHeader = (props) => {
     })
     return (
         <section id="room-header">
-            <h2>{props.name}</h2>
+            <h2>{props.roomName}</h2>
             <p>
                 {sortedUsers.map( (user,i) =>
                     <span key={i}>
-                        <span className={(user === props.user) ? 'active' : null}>{user}</span>
+                        <span className={(user === props.username) ? 'active' : null}>{user}</span>
                         <span>{(i !== props.users.length - 1) ? ', ' : ' '}</span>
                     </span>
                 )}
@@ -56,7 +65,14 @@ const RoomHeader = (props) => {
     )
 }
 
-// PROPS: user, messages
+RoomHeader.propTypes = {
+    username: PropTypes.string.isRequired,
+    roomName: PropTypes.string.isRequired,
+    users: PropTypes.array.isRequired,
+    onLogout: PropTypes.func.isRequired,
+}
+
+
 const RoomContent = (props) => {
     return (
         <section id="room-content">
@@ -76,7 +92,12 @@ const RoomContent = (props) => {
     )
 }
 
-// PROPS: onSubmitMessage
+RoomContent.propTypes = {
+    username: PropTypes.string.isRequired,
+    messages: PropTypes.array.isRequired,
+}
+
+
 const RoomContentInput = (props) => {
 
     const [message, setMessage] = useState('');
@@ -98,6 +119,12 @@ const RoomContentInput = (props) => {
         </form>
     )
 }
+
+RoomContent.propTypes = {
+    username: PropTypes.string.isRequired,
+    messages: PropTypes.array.isRequired,
+}
+
 
 const Loading = (props) => {
 
@@ -144,6 +171,12 @@ const Loading = (props) => {
         </div>
     )
 }
+
+Loading.propTypes = {
+    user: PropTypes.object.isRequired,
+    onLogout: PropTypes.func.isRequired,
+}
+
 
 export const Chatroom = (props) => {
 
@@ -260,7 +293,7 @@ export const Chatroom = (props) => {
         setActiveChatroomId(newActiveChatroomId);
     }
 
-    if (!loading && false
+    if (!loading
         && chatrooms.length 
         && Object.keys(messages).length
         && activeChatroomId !== null) {
@@ -270,20 +303,20 @@ export const Chatroom = (props) => {
         return (
             <div id="chatroom">
                 <RoomNav 
-                    user={props.user.name} 
+                    username={props.user.name} 
                     session={session} 
                     allRooms={chatrooms} 
                     activeRoomId={activeChatroomId}
                     onRoomClick={onRoomClick}
                     />
                 <RoomHeader 
-                    user={props.user.name} 
-                    name={activeRoom.name} 
+                    username={props.user.name} 
+                    roomName={activeRoom.name} 
                     users={activeRoom.users} 
                     onLogout={props.onLogout}
                     />
                 <RoomContent
-                    user={props.user.name} 
+                    username={props.user.name} 
                     messages={messages[activeChatroomId]}
                     />
                 <RoomContentInput
@@ -301,4 +334,7 @@ export const Chatroom = (props) => {
     }
 }
 
-// FIXME: add PropTypes checking here
+Chatroom.propTypes = {
+    user: PropTypes.object.isRequired,
+    onLogout: PropTypes.func.isRequired,
+}
