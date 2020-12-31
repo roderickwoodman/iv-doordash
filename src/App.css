@@ -93,7 +93,19 @@ input {
     #room-nav {
         grid-area: nav-area;
         background-color: #eb1700;
+        display: flex;
+        flex-direction: column;
+        flex-align: flex-start;
         color: white;
+    }
+
+    #room-nav > * {
+        margin: 1rem 0;
+    }
+
+    #room-nav #logo {
+        width: 60%;
+        align-self: center;
     }
 
     #room-nav #me .name {

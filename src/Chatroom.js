@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import doordashLogo from './img/logo-redonwhite.png'
 import { roomsListApi, roomsDetailApi, messagesApi, newMessageApi } from './Api.js'
 
 
 const RoomNav = (props) => {
     return (
         <section id="room-nav">
+            <div id="logo">
+                <img src={doordashLogo} alt="DoorDash logo" />
+            </div>
             <div id="me">
                 <p className="name">{props.username}</p>
                 <p className="session">{props.session}</p>
