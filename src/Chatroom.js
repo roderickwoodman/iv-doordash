@@ -55,7 +55,7 @@ const RoomHeader = (props) => {
     })
     return (
         <section id="room-header">
-            <h2>{props.roomName}</h2>
+            <h2 id="name">{props.roomName}</h2>
             <p>
                 {sortedUsers.map( (user,i) =>
                     <span key={i}>

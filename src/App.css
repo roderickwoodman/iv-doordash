@@ -130,6 +130,7 @@ input {
         background-color: white;
         padding: 1rem;
         text-align: center;
+        border-bottom: 1px solid silver;
     }
 
     #room-header .active {
@@ -142,6 +143,7 @@ input {
         grid-area: content-area;
         background-color: #edeff0;
         overflow-y: scroll;
+        border-bottom: 1px solid silver;
     }
 
     #message-list {
@@ -176,6 +178,8 @@ input {
         font-size: 0.85rem;
     }
 
+    /* footer */
+
     #room-content-input {
         grid-area: footer-area;
         background-color: white;
@@ -185,8 +189,6 @@ input {
         flex-direction: row;
         justify-content: flex-end;
     }
-
-    /* footer */
 
     #room-content-input input {
         flex: 1 1 90%;
@@ -205,6 +207,7 @@ input {
         border: 2px solid transparent;
         border-radius: 1rem;
         font-weight: 600;
+        line-height: 1;
     }
 
     #send-button:hover {
@@ -231,3 +234,86 @@ input {
     padding: 0.5rem;
 }
 
+
+@media only screen
+    and (max-width: 900px) {
+
+/* Chatroom Layout */
+
+#chatroom {
+    /* FULL SIZE: */
+    /* grid-template-rows: 7rem calc(100vh-12rem) 5rem; */
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 4rem 4rem calc(100vh - 12rem) 4rem;
+    grid-template-areas:
+        "nav-area"
+        "header-area"
+        "content-area"
+        "footer-area";
+}
+
+/* nav & header common  */
+
+#room-nav,
+#room-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#room-nav *,
+#room-header *,
+button, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* nav */
+
+#room-nav > * {
+    padding: 0.5rem;
+}
+
+#room-nav #logo {
+    flex: 0 0 4rem;
+}
+
+#room-nav #me {
+    flex: 0 0 12rem;
+}
+
+#room-nav #room-list {
+    padding: 0;
+    align-self: stretch;
+    flex: 1 1 auto;
+    font-size: 1rem;
+    line-height: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#room-nav #room-list li {
+    height: 100%;
+    width: 25%;
+    padding: 0.25rem;
+    display: inline-block;
+    border-left: 1px solid white;
+}
+
+#room-nav #room-list li:last-child {
+    border-right: 1px solid white;
+}
+
+/* header */
+
+#room-header #name {
+    font-size: 1.5rem;
+    min-width: 10rem;
+    text-align: left;
+}
+
+}
