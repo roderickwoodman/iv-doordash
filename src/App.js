@@ -50,9 +50,9 @@ const Login = (props) => {
 
     const validate = (value) => {
         let errors = {};
-        const legalCharacters = value.replace(/[^A-Za-z -'.]/ig, '');
+        const legalCharacters = value.replace(/[^A-Za-z \-'.]/ig, '');
         if (legalCharacters !== value) {
-            errors['chars'] = `Invalid characters. Please use A-Z, -, ', ., and space.`;
+            errors['chars'] = `Invalid characters. Please use only A-Z, -, ', ., and space.`;
         }
         const legalNonspaceCharacters = value.replace(/[^A-Za-z-'.]/ig, '');
         if (legalNonspaceCharacters.length && legalNonspaceCharacters.length < 3) {
