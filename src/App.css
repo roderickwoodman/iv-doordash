@@ -99,7 +99,7 @@ button,
     background-color: #edeff0;
     height: 100vh;
     display: grid;
-    grid-template-columns: 14rem auto;
+    grid-template-columns: 16rem auto;
     grid-template-rows: 7rem calc(100vh - 12rem) 5rem;
     grid-template-areas:
         "nav-area header-area"
@@ -128,7 +128,7 @@ button,
     }
 
     #room-nav #me .name {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 800;
         padding-bottom: 0;
         margin-bottom: 0;
@@ -308,7 +308,7 @@ p {
 }
 
 #room-nav #me {
-    flex: 0 0 12rem;
+    flex: 0 0 14rem;
 }
 
 #room-nav #room-list {

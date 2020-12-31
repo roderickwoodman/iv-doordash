@@ -58,8 +58,8 @@ const Login = (props) => {
         if (legalNonspaceCharacters.length && legalNonspaceCharacters.length < 3) {
             errors['lenshort'] = `Invalid length. Must be at least 3 legal characters long.`;
         }
-        if (value.length > 20) {
-            errors['lenlong'] = `Invalid length. Must be no more than 20 characters long.`;
+        if (value.length > 18) {
+            errors['lenlong'] = `Invalid length. Must be no more than 18 characters long.`;
         }
         const matchedConsecutiveSpaces = value.match(/\s{2,}/);
         if (matchedConsecutiveSpaces !== null) {
