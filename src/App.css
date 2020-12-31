@@ -96,6 +96,7 @@ button,
     height: 100vh;
     display: grid;
     grid-template-columns: 14rem auto;
+    grid-template-rows: 7rem calc(100vh - 12rem) 5rem;
     grid-template-areas:
         "nav-area header-area"
         "nav-area content-area"
