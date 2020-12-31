@@ -6,7 +6,7 @@ import { roomsListApi, roomsDetailApi, messagesApi, newMessageApi } from './Api.
 
 const RoomNav = (props) => {
     return (
-        <section id="room-nav">
+        <nav aria-labelledby="sections-heading" id="room-nav">
             <div id="logo">
                 <img src={doordashLogo} alt="DoorDash logo" />
             </div>
@@ -14,6 +14,7 @@ const RoomNav = (props) => {
                 <p className="name">{props.username}</p>
                 <p className="session">{props.session}</p>
             </div>
+            <h2 className="hide-element" id="sections-heading">Rooms</h2>
             <ul id="room-list">
                 { props.allRooms.map( (room,i) =>
                     <li 
@@ -24,7 +25,7 @@ const RoomNav = (props) => {
                             >{room.name}</li>
                 )}
             </ul>
-        </section>
+        </nav>
     )
 }
 
@@ -54,7 +55,7 @@ const RoomHeader = (props) => {
         }
     })
     return (
-        <section id="room-header">
+        <header id="room-header">
             <h2 id="name">{props.roomName}</h2>
             <p>
                 {sortedUsers.map( (user,i) =>
@@ -64,7 +65,7 @@ const RoomHeader = (props) => {
                     </span>
                 )}
             </p>
-        </section>
+        </header>
     )
 }
 
@@ -115,12 +116,14 @@ const RoomContentInput = (props) => {
     }
 
     return (
-        <form id="room-content-input" onSubmit={handleSubmit}>
-            <label className="hide-element" htmlFor="message">New message:</label>
-            <input id="message" type="input" placeholder="Type a message..." value={message} onChange={handleChange} />
-            <button id="send-button" type="submit">Send</button>
-            <button id="logout-button" onClick={props.onLogout}>logout</button>
-        </form>
+        <footer>
+            <form id="room-content-input" onSubmit={handleSubmit}>
+                <label className="hide-element" htmlFor="message">New message:</label>
+                <input id="message" type="input" placeholder="Type a message..." value={message} onChange={handleChange} />
+                <button id="send-button" type="submit">Send</button>
+                <button id="logout-button" onClick={props.onLogout}>logout</button>
+            </form>
+        </footer>
     )
 }
 
