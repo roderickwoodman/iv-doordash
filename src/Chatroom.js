@@ -78,10 +78,10 @@ const RoomContent = (props) => {
         <section id="room-content">
             <ul id="message-list">
                 {props.messages.map( (message,i) =>
-                    <li key={i} className={(message.name === props.user) ? 'mine' : null}>
+                    <li key={i} className={(message.name === props.username) ? 'mine' : null}>
                         <div>
                             <div className="message">{message.message}</div>
-                            { message.name !== props.user && 
+                            { message.name !== props.username && 
                             <div className="name">{message.name}</div>
                             }
                         </div>
@@ -120,9 +120,8 @@ const RoomContentInput = (props) => {
     )
 }
 
-RoomContent.propTypes = {
-    username: PropTypes.string.isRequired,
-    messages: PropTypes.array.isRequired,
+RoomContentInput.propTypes = {
+    onSubmitMessage: PropTypes.func.isRequired,
 }
 
 
@@ -156,7 +155,7 @@ const Loading = (props) => {
 
         return () => clearInterval(intervalId);
 
-    }, [props, props.user.name, props.user.sessionStart, props.onLogout]);
+    }, [props, props.user.sessionStart, props.onLogout]);
 
     return (
         <div id="chatroom">
