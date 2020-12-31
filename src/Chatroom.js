@@ -286,6 +286,8 @@ export const Chatroom = (props) => {
             })
             setChatrooms(updatedAllChatrooms);
 
+            // Force the chat window to the bottom
+            scrollToBottom();
 
         }
     }
