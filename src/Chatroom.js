@@ -19,7 +19,7 @@ const RoomNav = (props) => {
                     <li 
                         key={i} 
                         data-roomid={room.id}
-                        className={(room.id === props.activeRoomId) ? 'active' : null}
+                        className={(room.id === props.activeRoomId) ? 'clickable active' : 'clickable'}
                         onClick={props.onRoomClick}
                             >{room.name}</li>
                 )}

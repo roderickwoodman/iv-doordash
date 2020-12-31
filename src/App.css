@@ -41,6 +41,19 @@ input {
     border: 1px solid silver;
 }
 
+button,
+.clickable {
+    cursor: pointer;
+}
+
+.clickable {
+    border: 1px solid transparent;
+}
+
+.clickable:hover {
+    border: 1px solid white;
+}
+
 
 /* Login Layout */
 
@@ -95,7 +108,7 @@ input {
         background-color: #eb1700;
         display: flex;
         flex-direction: column;
-        flex-align: flex-start;
+        justify-content: flex-start;
         color: white;
     }
 
@@ -265,13 +278,17 @@ input {
 }
 
 #room-nav *,
-#room-header *,
-button, p {
+#room-content-input > button,
+p {
     margin: 0;
     padding: 0;
 }
 
 /* nav */
+
+#room-nav {
+    border-bottom: 1px solid silver;
+}
 
 #room-nav > * {
     padding: 0.5rem;
