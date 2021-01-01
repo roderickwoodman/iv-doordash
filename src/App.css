@@ -77,6 +77,11 @@ button,
     align-items: center;
 }
 
+#login > p,
+#login form p {
+    color: #ffff4d;
+}
+
 #login form {
     height: 8rem;
     width: 25rem;
@@ -265,7 +270,7 @@ button,
 }
 
 .error {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: #eb1700;
 }
 
