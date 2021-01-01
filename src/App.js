@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import socketClient from 'socket.io-client'
 import PropTypes from 'prop-types'
 import './App.css'
 import backgroundPhoto from './img/julian-rivera--hvhdqafQx8-unsplash-1920x1080dk.jpg'
@@ -104,6 +105,13 @@ export const App = () => {
         if (storedUser !== null) {
             setNewUser(storedUser);
         }
+
+        // Establish a websocket with the back end
+        const SERVER = 'http://localhost:8080';
+        const socket = socketClient(SERVER, {transports: ['websocket']});
+        socket.on('connection', () => {
+            console.log(`Connected with the server on ${SERVER}`);
+        })
 
     }, [])
 

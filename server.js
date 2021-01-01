@@ -29,7 +29,6 @@ const database = [
   { name: 'Coffee Chats', id: 1, users: ['Jessye'], messages: [{name: 'Jessye', message: 'ayy', id: 'ff35278', reaction: null}]}
 ]
 
-
 // Utility functions
 const findRoom = (roomId) => {
   const room = database.find((room) => {
@@ -115,5 +114,19 @@ router.route('/rooms/:roomId/messages')
   })
 
 app.use('/api', router)
-app.listen(port)
-console.log(`API running at localhost:${port}/api`)
+// app.listen(port)
+// console.log(`API running at localhost:${port}/api`)
+
+var http = require('http').createServer(app)
+http.listen(port, () => {
+  console.log(`listening on *:${port}`);
+})
+var io = require('socket.io')(http);
+
+io.on('connection', (socket) => {
+  console.log('a Web client connected');
+  socket.emit('connection', null);
+  socket.on('disconnect', () => {
+    console.log('a Web client disconnected');
+  })
+})
