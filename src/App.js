@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
-import backgroundPhoto from './img/julian-rivera--hvhdqafQx8-unsplash-1920x1080.jpg'
+import backgroundPhoto from './img/julian-rivera--hvhdqafQx8-unsplash-1920x1080dk.jpg'
 import { Chatroom } from './Chatroom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
