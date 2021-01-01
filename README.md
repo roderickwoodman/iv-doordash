@@ -29,7 +29,7 @@ Your second terminal window should now be showing the output:
 ><pre>Compiled successfully!
 >You can now view iv-doordash-FE in the browser.
 >Local:            http://localhost:8844</pre>
-Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app.
+Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app!
 
 ## OR, Connecting to the App LIVE on the Internet!
  
@@ -37,7 +37,7 @@ Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app
 * Chrome, Firefox, or Safari browsers at their current versions.
 
 ### Viewing in the browser
-Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the **DD-Chat** app.
+Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the **DD-Chat** app!
 
 ## Under The Hood
 
@@ -55,6 +55,7 @@ Many smaller design choices were made for **accessibility**, like an intentioned
 
 ### Testing
 While there weren't any automated tests, **manual functional tests** were performed on the Chrome, Firefox, and Safari browsers and on different iOS and Android mobile devices. For component integration, the **PropTypes library** was attached to every component with props and would always do type checking. And **ESLint** was always checking my coding as I typed away in my IDE. But the one holistic test suite that was run was the **Lighthouse Chrome DevTool**.
+![Lighthouse Report](https://ibb.co/xSLWmV9)
 
 ## Summary and Reflection
 
@@ -66,6 +67,9 @@ While there weren't any automated tests, **manual functional tests** were perfor
 |Large          |cloud-deployed!|
 ||
 
+> NOTE:  Technically, I now have two different Express server files:
+> * **server.js** gets used for localhost. It is still the original.
+> * **gcpServer.js** gets used for cloud deployment. It is a superset.
 
 ### Refactoring opportunities (aka: "do-overs")
 1. While the data fetching was controlled very smoothly via promises, **the UX of the wait during the initial data fetching** could have been designed better. The initial load of the chatroom view must wait on a few async API tasks to complete, and the timeout for bad response was put in the Chatroom component because that was immediately where the data-fetching was happening. So during that delay, the user sees a partial chatroom screen with no data. A better design would have been to offload the data-fetching to a new, "API" component, and keep the user at the login view/component until the initial data fetching resolved. Heck, even fetching the data immediately when the app loaded, and not waiting for the user to log in, would have been much better for performance and usability, because the same APIs are always fetched regardless of username submitted.
