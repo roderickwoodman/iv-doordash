@@ -112,6 +112,11 @@ export const App = () => {
         socket.on('connection', () => {
             console.log(`Connected with the server on ${SERVER}`);
         })
+        socket.on('sendMessage', (arg1) => {
+            console.log(`Received message from server ${arg1}`);
+        })
+
+        return () => socket.disconnect();
 
     }, [])
 
@@ -128,7 +133,7 @@ export const App = () => {
 
     if (newUser === null) {
         return (
-            <Login onSubmit={onSubmit} afterLogout={afterLogout}/>
+            <Login onSubmit={onSubmit} afterLogout={afterLogout} />
         );
     } else {
         return (

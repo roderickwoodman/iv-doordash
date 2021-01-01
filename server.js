@@ -71,6 +71,7 @@ router.get('/rooms', function(req, res) {
     })
     console.log('Response:',rooms)
     res.json(rooms)
+    messageClients('rooms!')
 })
 
 router.get('/rooms/:roomId', function(req, res) {
@@ -119,14 +120,34 @@ app.use('/api', router)
 
 var http = require('http').createServer(app)
 http.listen(port, () => {
-  console.log(`listening on *:${port}`);
+  console.log(`listening on *:${port}`)
 })
-var io = require('socket.io')(http);
+var io = require('socket.io')(http)
+
+var clients = [];
+const messageClients = (message) => {
+  clients.forEach( client => {
+    client.emit('sendMessage', message)
+  })
+}
 
 io.on('connection', (socket) => {
-  console.log('a Web client connected');
-  socket.emit('connection', null);
-  socket.on('disconnect', () => {
-    console.log('a Web client disconnected');
+
+  // connect a client
+  console.log('a Web client connected:',socket.id);
+  clients.push(socket)
+  socket.emit('connection', null)
+
+  // message a client
+  socket.on('sendMessage', (client, message) => {
+    console.log(`Messaging client ${client} with: ${message}`)
   })
+
+  // disconnect a client
+  socket.on('disconnect', () => {
+    const updatedClients = clients.filter( client => client.id !== socket.id )
+    clients = updatedClients;
+    console.log('a Web client disconnected')
+  })
+
 })
