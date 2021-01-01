@@ -248,6 +248,9 @@ export const Chatroom = (props) => {
             // Force the chat window to the bottom
             scrollToBottom();
 
+            // Clear the mailbox
+            props.onClearMailbox();
+
         }
 
         initRoomInfo()
@@ -255,7 +258,7 @@ export const Chatroom = (props) => {
 
         return () => clearInterval(intervalId);
 
-    }, [props.user.sessionStart]);
+    }, [props, props.user.sessionStart]);
 
     const scrollToBottom = () => {
 
@@ -346,4 +349,6 @@ export const Chatroom = (props) => {
 Chatroom.propTypes = {
     user: PropTypes.object.isRequired,
     onLogout: PropTypes.func.isRequired,
+    mailboxIsFull: PropTypes.bool.isRequired,
+    onClearMailbox: PropTypes.func.isRequired,
 }

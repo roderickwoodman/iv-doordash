@@ -97,6 +97,7 @@ export const App = () => {
 
     const [newUser, setNewUser] = useState(null);
     const [afterLogout, setAfterLogout] = useState(false);
+    const [mailboxIsFull, setMailboxIsFull] = useState(false);
 
     useEffect( () => {
 
@@ -109,11 +110,13 @@ export const App = () => {
         // Establish a websocket with the back end
         const SERVER = 'http://localhost:8080';
         const socket = socketClient(SERVER, {transports: ['websocket']});
-        socket.on('connection', () => {
-            console.log(`Connected with the server on ${SERVER}`);
+        socket.on('connection', (arg1) => {
+            console.log(`${arg1} [${SERVER}]`);
         })
         socket.on('sendMessage', (arg1) => {
-            console.log(`Received message from server ${arg1}`);
+            if (arg1 === 'dataWasPosted') {
+                setMailboxIsFull(true);
+            }
         })
 
         return () => socket.disconnect();
@@ -131,13 +134,17 @@ export const App = () => {
         setAfterLogout(true);
     }
 
+    const onClearMailbox = () => {
+        setMailboxIsFull(false);
+    }
+
     if (newUser === null) {
         return (
             <Login onSubmit={onSubmit} afterLogout={afterLogout} />
         );
     } else {
         return (
-            <Chatroom user={newUser} onLogout={onLogout} />
+            <Chatroom user={newUser} onLogout={onLogout} mailboxIsFull={mailboxIsFull} onClearMailbox={onClearMailbox} />
         );
     }
 }

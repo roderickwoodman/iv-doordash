@@ -71,7 +71,6 @@ router.get('/rooms', function(req, res) {
     })
     console.log('Response:',rooms)
     res.json(rooms)
-    messageClients('rooms!')
 })
 
 router.get('/rooms/:roomId', function(req, res) {
@@ -111,6 +110,7 @@ router.route('/rooms/:roomId/messages')
       room.messages.push(messageObj)
       console.log('Response:',{message: 'OK!'})
       res.json(messageObj)
+      messageClients('dataWasPosted')
     }
   })
 
@@ -130,13 +130,19 @@ const messageClients = (message) => {
     client.emit('sendMessage', message)
   })
 }
+const printClients = () => {
+  let allClients = [];
+  clients.forEach( client => allClients.push(client.id) )
+  console.log(`allClients[${allClients.length}]:`,allClients);
+}
 
 io.on('connection', (socket) => {
 
   // connect a client
   console.log('a Web client connected:',socket.id);
   clients.push(socket)
-  socket.emit('connection', null)
+  printClients()
+  socket.emit('connection', `Connected to the server as part of ${clients.length} total clients.`)
 
   // message a client
   socket.on('sendMessage', (client, message) => {
@@ -147,6 +153,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const updatedClients = clients.filter( client => client.id !== socket.id )
     clients = updatedClients;
+    printClients()
     console.log('a Web client disconnected')
   })
 
