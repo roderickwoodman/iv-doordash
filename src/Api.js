@@ -1,7 +1,7 @@
 // Rooms List API
 export const roomsListApi = () => {
     return (
-        fetch('http://localhost:8080/api/rooms')
+        fetch('/api/rooms')
         .then( response => response.json() )
     )
 }
@@ -9,7 +9,7 @@ export const roomsListApi = () => {
 // Rooms Detail API
 export const roomsDetailApi = (roomId) => {
     return (
-        fetch(`http://localhost:8080/api/rooms/${roomId}`)
+        fetch(`/api/rooms/${roomId}`)
         .then( response => response.json() )
     )
 }
@@ -17,7 +17,7 @@ export const roomsDetailApi = (roomId) => {
 // Messages API (GET)
 export const messagesApi = (roomId) => {
     return (
-        fetch(`http://localhost:8080/api/rooms/${roomId}/messages`)
+        fetch(`/api/rooms/${roomId}/messages`)
         .then( response => response.json() )
     )
 }
@@ -29,7 +29,7 @@ export const newMessageApi = (roomId, name, message) => {
         message: message,
     }
     return (
-        fetch(`http://localhost:8080/api/rooms/${roomId}/messages`, {
+        fetch(`/api/rooms/${roomId}/messages`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
