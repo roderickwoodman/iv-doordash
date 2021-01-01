@@ -1,70 +1,54 @@
 # DoorDash Frontend Interview Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+THIS is **DoorDash Chat ("DD-Chat")**. It's the app that lets you communicate in real-time with anyone else who has an Internet connection. Of course, there is no such thing as having too many chat apps. So here is how to get started...
 
-## Available Scripts
+## Connecting to a Locally Running App
 
-In the project directory, you can run:
+### System and browser requirements
+* [Node](https://nodejs.org/en/download/]) 7.0.0 or later.
+* Chrome, Firefox, or Safari browsers at their current versions.
 
-### `yarn start`
+### App installation and startup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+First, from [this GitHub repo](https://github.com/roderickwoodman/iv-doordash) click on the *"Code" button* and then select the *"Download ZIP" menu option* and save the file to your local drive.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Now, in the first terminal window, type:
 
-### `yarn test`
+	> cd <the download folder that contains the ZIP file>
+	> unzip iv-doordash-main.zip
+	> cd iv-doordash-main
+	> npm install
+	> npm run api-server
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+And in a second terminal window, type:
 
-### `yarn build`
+	> cd <the extracted iv-doordash-main folder> 
+	> npm run client
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Viewing in the browser
+Your second terminal window should now be showing the output:
+><pre>Compiled successfully!</pre><pre>You can now view iv-doordash-FE in the browser.</pre><pre>Local:            http://localhost:8844</pre>
+Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## OR, Connecting to the App LIVE on the Internet!
+ 
+### Browser requirements
+* Chrome, Firefox, or Safari browsers at their current versions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Viewing in the browser
+Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the **DD-Chat** app.
 
-### `yarn eject`
+## Under The Hood
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Technology decisions
+**ReactJS** was the chosen JavaScript library for its ease of use and simple state and lifecycle management via Hooks. **Create-react-app** was used in order to quickly bootstrap the project. **Bootstrap** was added to lean on some generally accepted element padding opinions. **Google Cloud Platform** was chosen to be the Node-based deployment platform primarily as a learning experience for the developer.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Macro code structure
+A modern, **component-based architecture** is essential for maintainability and extensibility. And because this application had a one-directional user flow in addition to a limited data flow between only 2 views, it made sense to have the two views be more presentational, child components ("Login" and "Chatroom") under a more container-like, parent component ("App"). With this definition, not much data would need to be shared between these **3 primary components**.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Micro code structure
+### Usability
+### Testing
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Extras
+### Features
