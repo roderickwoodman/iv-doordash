@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import './App.css';
+import './App.css'
+import backgroundPhoto from './img/julian-rivera--hvhdqafQx8-unsplash-1920x1080.jpg'
 import { Chatroom } from './Chatroom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -69,7 +70,7 @@ const Login = (props) => {
     }
 
     return(
-        <div id="login">
+        <div id="login" style={{ backgroundImage: `url(${backgroundPhoto})` }}>
             { props.afterLogout &&
             <p>You have been logged out.</p>
             }
