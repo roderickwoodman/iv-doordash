@@ -80,15 +80,18 @@ button,
 #login > p,
 #login form p {
     color: #ffff4d;
+    text-align: center;
 }
 
 #login form {
     height: 8rem;
-    width: 25rem;
+    width: 20rem;
+    max-width: 80%;
 }
 
 #login form input {
     width: 100%;
+    border: 2px solid #eb1700
 }
 
 #login form p.noerrors {
@@ -281,6 +284,7 @@ button,
 /* Chatroom Layout */
 
 #chatroom {
+    /* background-color: #eb1700; */
     height: 100vh;
     display: grid;
     grid-template-columns: auto;
@@ -299,11 +303,10 @@ button,
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
 }
 
 #room-nav *,
-#room-content-input > button,
 p {
     margin: 0;
     padding: 0;
@@ -324,7 +327,7 @@ p {
 }
 
 #room-nav #me {
-    flex: 0 0 14rem;
+    flex: 0 0 13rem;
 }
 
 #room-nav #room-list {
@@ -332,22 +335,20 @@ p {
     align-self: stretch;
     flex: 1 1 auto;
     font-size: 1rem;
-    line-height: 1;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-}
-
-#room-nav #room-list li {
-    height: 100%;
-    width: 25%;
-    padding: 0.25rem;
-    display: inline-block;
+    align-items: stretch;
+    flex-wrap: wrap;
     border-left: 1px solid white;
 }
 
-#room-nav #room-list li:last-child {
+#room-nav #room-list li {
+    flex: 0 0 10rem;
+    text-align: center;
+    padding: 0.25rem;
+    display: inline-block;
     border-right: 1px solid white;
+    border-bottom: 1px solid white;
 }
 
 /* header */
@@ -357,5 +358,31 @@ p {
     min-width: 10rem;
     text-align: left;
 }
+
+/* footer */
+
+#logout-button {
+    color: white;
+}
+
+#logout-button:hover {
+    color: black;
+}
+
+}
+
+
+
+@media only screen
+    and (max-width: 800px) {
+
+    #room-nav #me {
+        display: none
+    }
+
+    #room-nav #room-list li {
+        flex: 0 0 8rem;
+        font-size: 0.85em;
+    }
 
 }
