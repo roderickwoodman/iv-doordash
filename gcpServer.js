@@ -10,11 +10,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 var port = process.env.PORT || 8080
+// var port = 65080
 
 var router = express.Router()
 
@@ -36,7 +36,6 @@ const database = [
   { name: 'Tea Chats', id: 0, users: ['Ryan','Nick', 'Danielle'], messages: [{name: 'Ryan', message: 'ayyyyy', id: 'gg35545', reaction: null},{name: 'Nick', message: 'lmao', id: 'yy35578', reaction: null}, {name: 'Danielle', message: 'leggooooo', id: 'hh9843', reaction: null}]},
   { name: 'Coffee Chats', id: 1, users: ['Jessye'], messages: [{name: 'Jessye', message: 'ayy', id: 'ff35278', reaction: null}]}
 ]
-
 
 // Utility functions
 const findRoom = (roomId) => {
@@ -119,9 +118,51 @@ router.route('/rooms/:roomId/messages')
       room.messages.push(messageObj)
       console.log('Response:',{message: 'OK!'})
       res.json(messageObj)
+      messageClients('dataWasPosted')
     }
   })
 
 app.use('/api', router)
-app.listen(port)
-console.log(`API running on ${port}`)
+// app.listen(port)
+// console.log(`API running at localhost:${port}/api`)
+
+var http = require('http').createServer(app)
+http.listen(port, () => {
+  console.log(`listening on *:${port}`)
+})
+var io = require('socket.io')(http)
+
+var clients = [];
+const messageClients = (message) => {
+  clients.forEach( client => {
+    client.emit('sendMessage', message)
+  })
+}
+const printClients = () => {
+  let allClients = [];
+  clients.forEach( client => allClients.push(client.id) )
+  console.log(`allClients[${allClients.length}]:`,allClients);
+}
+
+io.on('connection', (socket) => {
+
+  // connect a client
+  console.log('a Web client connected:',socket.id);
+  clients.push(socket)
+  printClients()
+  socket.emit('connection', `Connected to the server as part of ${clients.length} total clients.`)
+
+  // message a client
+  socket.on('sendMessage', (client, message) => {
+    console.log(`Messaging client ${client} with: ${message}`)
+  })
+
+  // disconnect a client
+  socket.on('disconnect', () => {
+    const updatedClients = clients.filter( client => client.id !== socket.id )
+    clients = updatedClients;
+    printClients()
+    console.log('a Web client disconnected')
+  })
+
+})

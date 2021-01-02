@@ -109,6 +109,8 @@ export const App = () => {
 
         // Establish a websocket with the back end
         const SERVER = 'http://localhost:8080';
+        //const SERVER = 'http://localhost:8081'; // for GCP deployment
+        // console.log('using SERVER:',SERVER);
         const socket = socketClient(SERVER, {transports: ['websocket']});
         socket.on('connection', (arg1) => {
             console.log(`${arg1} [${SERVER}]`);
