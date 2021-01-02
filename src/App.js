@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const Login = (props) => {
 
     const [usernameInput, setUsernameInput] = useState('');
-    const [errorMessage, setErrorMessage] = useState('No errors.');
+    const [errorMessage, setErrorMessage] = useState(null);
     const [validUsername, setValidUsername] = useState(null);
 
     const handleChange = (event) => {
@@ -34,7 +34,7 @@ const Login = (props) => {
             setErrorMessage(validationErrors.spaces);
         } else {
             setValidUsername(potentialUsername.trim());
-            setErrorMessage('No errors.');
+            setErrorMessage(null);
         }
     }
 
@@ -79,7 +79,7 @@ const Login = (props) => {
                 <div>
                     <label className="hide-element" htmlFor="username">Username:</label>
                     <input id="username" type="text" value={usernameInput} onChange={handleChange} placeholder="Type your username..." autoFocus required />
-                    <p className={(errorMessage === 'No errors.') ? "error noerrors" : "error"}>{errorMessage}</p>
+                    <p className="error">{(errorMessage === null) ? ''  : errorMessage}</p>
                 </div>
                 <button type="submit">Join the DoorDash Chat!</button>
             </form>
