@@ -54,18 +54,18 @@ const Login = (props) => {
         let errors = {};
         const legalCharacters = value.replace(/[^A-Za-z \-'.]/ig, '');
         if (legalCharacters !== value) {
-            errors['chars'] = `Invalid characters. Please use only A-Z, -, ', ., and space.`;
+            errors['chars'] = `Invalid. Please use only A-Z, -, ', ., and space.`;
         }
         const legalNonspaceCharacters = value.replace(/[^A-Za-z-'.]/ig, '');
         if (legalNonspaceCharacters.length && legalNonspaceCharacters.length < 3) {
-            errors['lenshort'] = `Invalid length. Must be at least 3 legal characters long.`;
+            errors['lenshort'] = `Invalid. Must be at least 3 characters.`;
         }
         if (value.length > 18) {
-            errors['lenlong'] = `Invalid length. Must be no more than 18 characters long.`;
+            errors['lenlong'] = `Invalid. Must be no more than 18 characters.`;
         }
         const matchedConsecutiveSpaces = value.match(/\s{2,}/);
         if (matchedConsecutiveSpaces !== null) {
-            errors['spaces'] = `Invalid username. Consecutive spaces are not allowed.`;
+            errors['spaces'] = `Invalid. Consecutive spaces are not allowed.`;
         }
         return errors;
     }
