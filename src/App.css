@@ -60,6 +60,10 @@ input {
     border: 1px solid silver;
 }
 
+input:focus {
+    outline: 2px solid #eb1700;
+}
+
 button,
 .clickable {
     cursor: pointer;
@@ -115,7 +119,7 @@ button,
 
 #login form input {
     width: 100%;
-    border: 2px solid #eb1700
+    border: 2px solid gray
 }
 
 #login form #error {
@@ -207,7 +211,7 @@ button,
     #room-content {
         grid-area: content-area;
         background-color: #edeff0;
-        overflow-y: hidden;
+        overflow-y: scroll;
         border-bottom: 1px solid silver;
     }
 
@@ -267,7 +271,7 @@ button,
     #send-button,
     #logout-button {
         background-color: transparent;
-        color: blue;
+        color: #eb1700;
         border: 2px solid transparent;
         border-radius: 1rem;
         font-weight: 600;
@@ -275,20 +279,22 @@ button,
     }
 
     #send-button:hover {
-        background-color: #edeff0;
-        border: 2px solid blue;
+        color: white;
+        background-color: #eb1700;
+        border: 2px solid #eb1700;
     }
 
     #logout-button {
-        color: black;
+        color: #eb1700;
         position: fixed;
         top: 0.5rem;
         right: 0.5rem;
     }
 
     #logout-button:hover {
-        background-color: #edeff0;
-        border: 2px solid black;
+        color: white;
+        background-color: #eb1700;
+        border: 2px solid #eb1700;
     }
 
 
@@ -391,7 +397,9 @@ p {
 }
 
 #logout-button:hover {
-    color: black;
+    color: #eb1700;
+    background-color: white;
+    border: 2px solid white;
 }
 
 }
