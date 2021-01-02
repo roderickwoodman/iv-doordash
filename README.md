@@ -38,15 +38,21 @@ Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app
 
 ### Viewing in the browser
 Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the **DD-Chat** app!
-![Login screen on different devices](images/ss-login-devices.png)
+
+*Figure 1 - Login view*
+![Login screen on different devices](images/ss-login-devices-350.png)
 ## Under The Hood
 
 ### Technology selections
 **ReactJS** was the chosen JavaScript library for its ease of use and simple state and lifecycle management via Hooks. **Create-react-app** was used in order to quickly bootstrap the project. **Bootstrap** was added to have some generally accepted defaults for otherwise tricky design opinions like element padding. **Google Cloud Platform** was chosen as the Node-based deployment platform primarily to be a learning experience for the developer.
+
+*Figure 2 - Chatroom view*
 ![Chatroom view on a desktop screen](images/ss-chatroom-fullscreen.png)
 ### Macro code structure
 A modern, **component-based architecture** is essential for maintainability and extensibility. And because this application had a one-directional user flow in addition to a very limited data flow between only 2 views, it made sense to have the two views be more presentational style components ("Login" and "Chatroom") that were children under a more container-like, parent component ("App"). With this definition, not much data would need to be shared between these **3 primary components**, producing minimal coupling.
-![Chatroom view on a narrow screen](images/ss-chatroom-narrowscreen.png)
+
+*Figure 3 - Chatroom view on a narrow screen*
+![Chatroom view on a narrow screen](images/ss-chatroom-narrowscreen-350.png)
 ### Micro code structure
 **Functional components** and **React Hooks** were used throughout the project, to eliminate the constructor boilerplate and "this" keyword referencing that would have been needed by class components. **Stateless components** were used wherever possible to improve maintainability. **SetInterval() timers** were used for managing Login delays and session time.  **Many ES6 features** like arrow functions, template literals, let and const, and promises (**async/await**) made coding easier and more readable. Both **CSS Grid** and **CSS Flexbox** were used to produce a responsive layout that had both fixed and expansive regions. And a **CSS Media Queries** breakpoint provided a second Grid layout for small screens that would still resemble the larger version.
 
@@ -55,7 +61,9 @@ Many smaller design choices were made for **accessibility**, like an intentioned
 
 ### Testing
 While there weren't any automated tests, **manual functional tests** were performed on the Chrome, Firefox, and Safari browsers and on different iOS and Android mobile devices. For component integration, the **PropTypes library** was attached to every component with props and would always do type checking. And **ESLint** was always checking my coding as I typed away in my IDE. But the one holistic test suite that was run was the **Lighthouse Chrome DevTool**.
-![Lighthouse Report](images/ss-lighthouse.png)
+
+*Figure 4 - Lighthouse report for desktop (GCP deployment)*
+![Lighthouse Report](images/ss-lighthouse-350.png)
 
 ## Summary and Reflection
 
