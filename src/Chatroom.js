@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import doordashLogo from './img/logo-redonwhite.png'
 import { roomsListApi, roomsDetailApi, messagesApi, newMessageApi } from './Api.js'
 
 
 const RoomNav = (props) => {
     return (
         <nav aria-labelledby="sections-heading" id="room-nav">
-            <div id="logo">
-                <img src={doordashLogo} alt="DoorDash logo" />
-            </div>
+            <svg id="logo" width="128" height="72" viewBox="0 0 99.5 56.5" fill="#ffffff"><path d="M95.64,13.38A25.24,25.24,0,0,0,73.27,0H2.43A2.44,2.44,0,0,0,.72,4.16L16.15,19.68a7.26,7.26,0,0,0,5.15,2.14H71.24a6.44,6.44,0,1,1,.13,12.88H36.94a2.44,2.44,0,0,0-1.72,4.16L50.66,54.39a7.25,7.25,0,0,0,5.15,2.14H71.38c20.26,0,35.58-21.66,24.26-43.16"></path></svg>
             <div id="me">
                 <p className="name">{props.username}</p>
                 <p className="session">{props.session}</p>

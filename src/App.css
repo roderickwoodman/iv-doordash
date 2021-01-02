@@ -168,6 +168,7 @@ button,
     }
 
     #room-nav #logo {
+        margin-top: 3rem;
         width: 60%;
         align-self: center;
     }
@@ -347,6 +348,7 @@ p {
 }
 
 #room-nav #logo {
+    margin-top: 0;
     flex: 0 0 4rem;
 }
 
@@ -397,7 +399,7 @@ p {
 
 
 @media only screen
-    and (max-width: 800px) {
+    and (max-width: 725px) {
 
     #room-nav #me {
         display: none
