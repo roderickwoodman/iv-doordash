@@ -40,7 +40,9 @@ Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app
 Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the **DD-Chat** app!
 
 <p align="center">
-  <img width="350" height="322" src="images/ss-login-devices-350.png">
+  <img width="400" height="368" src="images/ss-login-devices.png">
+</p>
+<p align="center">
   <em>Figure 1 - Login view</em>
 </p>
 
@@ -51,6 +53,8 @@ Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the *
 
 <p align="center">
   <img width="500" height="277" src="images/ss-chatroom-fullscreen.png">
+</p>
+<p align="center">
   <em>Figure 2 - Chatroom view</em>
 </p>
 
@@ -58,7 +62,9 @@ Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the *
 A modern, **component-based architecture** is essential for maintainability and extensibility. And because this application had a one-directional user flow in addition to a very limited data flow between only 2 views, it made sense to have the two views be more presentational style components ("Login" and "Chatroom") that were children under a more container-like, parent component ("App"). With this definition, not much data would need to be shared between these **3 primary components**, producing minimal coupling.
 
 <p align="center">
-  <img width="350" height="404" src="images/ss-chatroom-narrowscreen-350.png">
+  <img width="350" height="354" src="images/ss-chatroom-narrowscreen.png">
+</p>
+<p align="center">
   <em>Figure 3 - Chatroom view on a narrow screen</em>
 </p>
 
@@ -72,7 +78,9 @@ Many smaller design choices were made for **accessibility**, like an intentioned
 While there weren't any automated tests, **manual functional tests** were performed on the Chrome, Firefox, and Safari browsers and on different iOS and Android mobile devices. For component integration, the **PropTypes library** was attached to every component with props and would always do type checking. And **ESLint** was always checking my coding as I typed away in my IDE. But the one holistic test suite that was run was the **Lighthouse Chrome DevTool**.
 
 <p align="center">
-  <img width="350" height="207" src="images/ss-lighthouse-350.png">
+  <img width="600" height="219" src="images/ss-lighthouse.png">
+</p>
+<p align="center">
   <em>Figure 4 - Lighthouse report for desktop</em>
 </p>
 
