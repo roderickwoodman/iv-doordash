@@ -119,7 +119,7 @@ const RoomContentInput = (props) => {
         <footer>
             <form id="room-content-input" onSubmit={handleSubmit}>
                 <label className="hide-element" htmlFor="message">New message:</label>
-                <input id="message" type="input" placeholder="Type a message..." value={message} onChange={handleChange} />
+                <input id="message" type="text" placeholder="Type a message..." value={message} onChange={handleChange} />
                 <button id="send-button" type="submit">Send</button>
                 <button id="logout-button" onClick={props.onLogout}>logout</button>
             </form>
