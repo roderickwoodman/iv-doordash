@@ -1,6 +1,9 @@
 runtime: nodejs12
 env: standard
 entrypoint: node gcpServer.js
+
+# WIP sockets on GCP
+#
 #network:
   #session_affinity: true
 
