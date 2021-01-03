@@ -129,6 +129,10 @@ While there weren't any automated tests, **manual functional tests** were perfor
 ### Extras!
 The following features were not required, but were added anyways because they make a better product overall.
 <img float="right" width="200" height="160" src="images/ss-newspaper-extra-extra.png">
+* **small:** custom favicon, custom page title, logout button, sorted room names, logo, login background image
+* **medium:** login validation, persistent user state, login timeout failover, responsive 2nd layout
+* **large:** cloud-deployed! sockets! (but not both working together on the same platform)
+
 | Size   | Extra Features                                                                                    |
 |--------|---------------------------------------------------------------------------------------------------|
 | small  | custom favicon, custom page title, logout button, sorted room names, logo, login background image |
