@@ -130,15 +130,9 @@ While there weren't any automated tests, **manual functional tests** were perfor
 <img align="right" width="200" height="160" src="images/ss-newspaper-extra-extra.png">
 
 The following features were not required, but were added anyways because they make a better product overall:
-* **small:** custom favicon, custom page title, logout button, sorted room names, logo, login background image
-* **medium:** login validation, persistent user state, login timeout failover, responsive 2nd layout
-* **large:** cloud-deployed! sockets! (but not both working together on the same platform)
-
-| Size   | Extra Features                                                                                    |
-|--------|---------------------------------------------------------------------------------------------------|
-| small  | custom favicon, custom page title, logout button, sorted room names, logo, login background image |
-| medium | login validation, persistent user state, login timeout failover, responsive 2nd layout            |
-| large  | cloud-deployed! sockets! (but not both working together on the same platform)                     |
+* **small-sized features:** custom favicon, custom page title, logout button, sorted room names, DoorDash logo, login background image
+* **medium-sized features:** login validation, persistent user state, login timeout failover, responsive 2nd layout for narrow screens
+* **large-sized features:** cloud-deployed! sockets! (but not both working together on the same platform)
 
 ### Server files
 Note, in order to get sockets and cloud deployment to work, I needed to make additions to the original server file. I kept everything including the APIs untouched, but I did end up adding several new lines of code...
