@@ -130,7 +130,7 @@ While there weren't any automated tests, **manual functional tests** were perfor
 |Medium          |login validation, persistent user state, login timeout failover, responsive 2nd layout           |
 |Large          |cloud-deployed! sockets! (but not both working together)|
 ||
-<p align="right">
+<p float="right">
   <img width="200" height="160" src="images/ss-newspaper-extra-extra.png">
 </p>
 
@@ -139,9 +139,10 @@ While there weren't any automated tests, **manual functional tests** were perfor
 > * **gcpServer.js** gets used for cloud deployment. It is the original with GCP additions.
 
 ### Refactoring opportunities (aka: "do-overs")
-<p align="left">
+<p float="left">
   <img width="200" height="200" src="images/ss-emoji-thinking.png">
 </p>
+
 1. While the data fetching was controlled very smoothly via promises, **the UX of the wait during the initial data fetching** could have been designed better. The initial load of the chatroom view must wait on a few async API tasks to complete, and the timeout for bad response was put in the Chatroom component because that was immediately where the data-fetching was happening. So during that delay, the user sees a partial chatroom screen with no data. A better design would have been to offload the data-fetching to a new, "API" component, and keep the user at the login view/component until the initial data fetching resolved. Heck, even fetching the data immediately when the app loaded, and not waiting for the user to log in, would have been much better for performance and usability, because the same APIs are always fetched regardless of username submitted.
 
 2. **Websockets on a cloud deployment** is not yet working. Getting websockets running on localhost was an accompishment, but getting websockets running on ishment indeed. But outside of my local machine, networking security is a complex and serious thing. What is allowed and how many configuration knobs there are to do it is cloud provider dependent. I played with different environments like "standard" and "flex" and I toggled on session affinity, but no luck. GCP was chosen for cloud hosting and then socket.io was added later. There may be another cloud provider with infrastructure that runs websockets more more easily of the box. Or maybe a using a different client library would work better on GCP.
