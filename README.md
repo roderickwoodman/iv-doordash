@@ -105,7 +105,7 @@ A modern, **component-based architecture** is essential for maintainability and 
 </p>
 
 ### Usability
-Many smaller design choices were made for **accessibility**, like an intentioned focus-tabbing as well as using < label > on all inputs and semantic tags like < nav>. **Affordances** were added to things like button hover states. And common **session management features** like login form validation, app loading timeout, and a logout link in the design help to make the user feel connected with the app through session feedback and (limited) user control. **Persistent storage of user state**, specifically of the username and the active chatroom, prevented information loss due to browser refreshes. And finally, **relative CSS dimensions** like "rem" and "vh" were used everywhere so that when the user scales the font size for instance, the dimensions of the container elements scale too so that the proportions between the text and the shapes are maintained.
+Many smaller design choices were made for **accessibility**, like an intentioned focus-tabbing as well as using < label > on all inputs and semantic tags like < nav>. **Affordances** were added to things like button hover states. And common **session management features** like login form validation, app loading timeout, and a logout link in the design help to make the user feel connected with the app through session feedback and (limited) user control. **Persistent storage of user state**, specifically of the username and the active chatroom, prevented information loss due to browser refreshes. In addition, **a websocket connection** prevented the user from needing to refresh the page manually anytime another client posted a new chat message. And finally, **relative CSS dimensions** like "rem" and "vh" were used everywhere so that when the user scales the font size for instance, the dimensions of the container elements scale too so that the proportions between the text and the shapes are maintained.
 
 <p align="center">
   <img width="600" height="174" src="images/ss-persistent-user-state.png">
@@ -132,7 +132,7 @@ While there weren't any automated tests, **manual functional tests** were perfor
 The following features were not required, but were added anyways because they make a better product overall:
 * **small-sized features:** custom favicon, custom page title, logout button, sorted room names, DoorDash logo, login background image
 * **medium-sized features:** login validation, persistent user state, login timeout failover, responsive 2nd layout for narrow screens
-* **large-sized features:** cloud-deployed! sockets! (but not both working together on the same platform)
+* **large-sized features:** cloud-deployed! sockets, for automatic page refresh! (but unfortunately not both working together on the same platform)
 
 ### Server files
 Note, in order to get sockets and cloud deployment to work, I needed to make additions to the original server file. I kept everything including the APIs untouched, but I did end up adding several new lines of code...
