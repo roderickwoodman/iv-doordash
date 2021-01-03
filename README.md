@@ -21,7 +21,7 @@ Now, in the first terminal window, type:
 
 And verify this response:
 
-><pre> > iv-doordash-FE@1.0.0 api-server
+><pre>> iv-doordash-FE@1.0.0 api-server
 > > node server.js
 >
 > API running at localhost:8080/api</pre>
