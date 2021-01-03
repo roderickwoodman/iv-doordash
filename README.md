@@ -124,27 +124,22 @@ While there weren't any automated tests, **manual functional tests** were perfor
 
 ### Extras!
 
-|                |                    |
-|-|-------------------------------|
-|Small|custom favicon, custom page title, logout button, sorted room names, logo, login background image            |
-|Medium          |login validation, persistent user state, login timeout failover, responsive 2nd layout           |
-|Large          |cloud-deployed! sockets! (but not both working together)|
-||
-<p float="right">
-  <img width="200" height="160" src="images/ss-newspaper-extra-extra.png">
-</p>
+<img align="right" width="200" height="160" src="images/ss-newspaper-extra-extra.png">
+| Size    | Extra Features                                                                                    |
+|---------|---------------------------------------------------------------------------------------------------|
+| small   | custom favicon, custom page title, logout button, sorted room names, logo, login background image |
+| mmedium | login validation, persistent user state, login timeout failover, responsive 2nd layout            |
+| large   | cloud-deployed! sockets! (but not both working together)   
 
 > NOTE:  Technically, I now have two different Express server files:
 > * **server.js** gets used for localhost. It is the original with sockets additions.
 > * **gcpServer.js** gets used for cloud deployment. It is the original with GCP additions.
 
 ### Refactoring opportunities (aka: "do-overs")
-<p float="left">
-  <img width="200" height="200" src="images/ss-emoji-thinking.png">
-</p>
+<img align="left" width="200" height="200" src="images/ss-emoji-thinking.png">
 
 1. While the data fetching was controlled very smoothly via promises, **the UX of the wait during the initial data fetching** could have been designed better. The initial load of the chatroom view must wait on a few async API tasks to complete, and the timeout for bad response was put in the Chatroom component because that was immediately where the data-fetching was happening. So during that delay, the user sees a partial chatroom screen with no data. A better design would have been to offload the data-fetching to a new, "API" component, and keep the user at the login view/component until the initial data fetching resolved. Heck, even fetching the data immediately when the app loaded, and not waiting for the user to log in, would have been much better for performance and usability, because the same APIs are always fetched regardless of username submitted.
 
-2. **Websockets on a cloud deployment** is not yet working. Getting websockets running on localhost was an accompishment, but getting websockets running on ishment indeed. But outside of my local machine, networking security is a complex and serious thing. What is allowed and how many configuration knobs there are to do it is cloud provider dependent. I played with different environments like "standard" and "flex" and I toggled on session affinity, but no luck. GCP was chosen for cloud hosting and then socket.io was added later. There may be another cloud provider with infrastructure that runs websockets more more easily of the box. Or maybe a using a different client library would work better on GCP.
+2. **Websockets on a cloud deployment** is not yet working. Getting websockets running on localhost was an accompishment, but getting websockets running on my GCP deployment was a challenge. This step seems to be cloud provider dependent, though. I played with different environments like "standard" and "flex" and I toggled on session affinity, but no luck. GCP was chosen for cloud hosting and then socket.io was added later. So there may be another cloud provider and/or socket library choice that pair better.
 
-3. **Screen sizing on mobile** needs more attention. It was a little frustrating that 100vh did not represent the useable height because of the top bar coverage. So, more precise height calculations are needed in order that the app can be laid out to fill the full useable area on mobile browsers. Too many minor adjustments are needed on mobile, when the whole layout should just snap into place like it does on desktop.
+3. **Screen sizing on mobile** needs more attention. It was a little frustrating that 100vh did not represent the useable height because of the top bar coverage. So, more precise height calculations are needed in order that the app can be laid out to fill the full useable area on mobile browsers. Too many minor pinch and drag adjustments are needed on mobile, when the whole layout should just snap into place like it does on desktop.
