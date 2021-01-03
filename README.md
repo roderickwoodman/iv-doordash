@@ -2,7 +2,7 @@
 
 THIS is **DoorDash Chat ("DD-Chat")**. It's the app that lets you communicate in real-time with anyone else who has an Internet connection. Of course, there is no such thing as having too many chat apps. So here is how to get started...
 
-## Connecting to a Locally Running App
+## Connecting to the Locally Running App
 
 ### System and browser requirements
 * [Node](https://nodejs.org/en/download/]) 7.0.0 or later.
@@ -39,6 +39,10 @@ Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app
 ### Viewing in the browser
 Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the **DD-Chat** app!
 
+## UI Views
+
+The **login screen** is a simple username input field and a submit button. The background image communicates the mood of being mobile and socially connected. After passing the client-side string validation, the user is taken to the chatroom view.
+
 <p align="center">
   <img width="400" height="368" src="images/ss-login-devices.png">
 </p>
@@ -46,10 +50,7 @@ Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the *
   <em>Figure 1 - Login view</em>
 </p>
 
-## Under The Hood
-
-### Technology selections
-**ReactJS** was the chosen JavaScript library for its ease of use and simple state and lifecycle management via Hooks. **Create-react-app** was used in order to quickly bootstrap the project. **Bootstrap** was added to have some generally accepted defaults for otherwise tricky design opinions like element padding. **Google Cloud Platform** was chosen as the Node-based deployment platform primarily to be a learning experience for the developer.
+The **chatroom view** is the primary interface for the user. It has simple color scheme and a session timer and a nav which switches between chatrooms.
 
 <p align="center">
   <img width="500" height="277" src="images/ss-chatroom-fullscreen.png">
@@ -58,8 +59,7 @@ Simply point your browser to  https://iv-doordash.wl.r.appspot.com/ to see the *
   <em>Figure 2 - Chatroom view</em>
 </p>
 
-### Macro code structure
-A modern, **component-based architecture** is essential for maintainability and extensibility. And because this application had a one-directional user flow in addition to a very limited data flow between only 2 views, it made sense to have the two views be more presentational style components ("Login" and "Chatroom") that were children under a more container-like, parent component ("App"). With this definition, not much data would need to be shared between these **3 primary components**, producing minimal coupling.
+The **chatroom view on narrow screens** looks similar to the wide version. However, certain information was hidden in order to make room to fit all of the nav.
 
 <p align="center">
   <img width="350" height="354" src="images/ss-chatroom-narrowscreen.png">
@@ -68,11 +68,47 @@ A modern, **component-based architecture** is essential for maintainability and 
   <em>Figure 3 - Chatroom view on a narrow screen</em>
 </p>
 
+## Under The Hood
+
+### Technology selections
+**ReactJS** was the chosen JavaScript library for its ease of use and simple state and lifecycle management via Hooks. **Create-react-app** was used in order to quickly bootstrap the project. **Bootstrap** was added to have some generally accepted defaults for otherwise tricky design opinions like element padding. **Google Cloud Platform** was chosen as the Node-based deployment platform primarily to be a learning experience for the developer.
+
+<p align="center">
+  <img width="600" height="241" src="images/ss-create-react-app.png">
+</p>
+<p align="center">
+  <em>Figure 4 - create-react-app</em>
+</p>
+
+### Macro code structure
+A modern, **component-based architecture** is essential for maintainability and extensibility. And because this application had a one-directional user flow in addition to a very limited data flow between only 2 views, it made sense to have the two views be more presentational style components ("Login" and "Chatroom") that were children under a more container-like, parent component ("App"). With this definition, not much data would need to be shared between these **3 primary components**, producing minimal coupling.
+
+<p align="center">
+  <img width="600" height="458" src="images/ss-component-sketch.jpg">
+</p>
+<p align="center">
+  <em>Figure 5 - Component architecture sketch</em>
+</p>
+
 ### Micro code structure
 **Functional components** and **React Hooks** were used throughout the project, to eliminate the constructor boilerplate and "this" keyword referencing that would have been needed by class components. **Stateless components** were used wherever possible to improve maintainability. **SetInterval() timers** were used for managing Login delays and session time.  **Many ES6 features** like arrow functions, template literals, let and const, and promises (**async/await**) made coding easier and more readable. Both **CSS Grid** and **CSS Flexbox** were used to produce a responsive layout that had both fixed and expansive regions. And a **CSS Media Queries** breakpoint provided a second Grid layout for small screens that would still resemble the larger version.
 
+<p align="center">
+  <img width="600" height="399" src="images/ss-component-code.png">
+</p>
+<p align="center">
+  <em>Figure 6 - Component implementation</em>
+</p>
+
 ### Usability
 Many smaller design choices were made for **accessibility**, like an intentioned focus-tabbing as well as using < label > on all inputs and semantic tags like < nav>. **Affordances** were added to things like button hover states. And common **session management features** like login form validation, app loading timeout, and a logout link in the design help to make the user feel connected with the app through session feedback and (limited) user control. **Persistent storage of user state**, specifically of the username and the active chatroom, prevented information loss due to browser refreshes. And finally, **relative CSS dimensions** like "rem" and "vh" were used everywhere so that when the user scales the font size for instance, the dimensions of the container elements scale too so that the proportions between the text and the shapes are maintained.
+
+<p align="center">
+  <img width="600" height="174" src="images/ss-persistent-user-state.png">
+</p>
+<p align="center">
+  <em>Figure 7 - Persistent user state</em>
+</p>
 
 ### Testing
 While there weren't any automated tests, **manual functional tests** were performed on the Chrome, Firefox, and Safari browsers and on different iOS and Android mobile devices. For component integration, the **PropTypes library** was attached to every component with props and would always do type checking. And **ESLint** was always checking my coding as I typed away in my IDE. But the one holistic test suite that was run was the **Lighthouse Chrome DevTool**.
@@ -81,12 +117,16 @@ While there weren't any automated tests, **manual functional tests** were perfor
   <img width="600" height="219" src="images/ss-lighthouse.png">
 </p>
 <p align="center">
-  <em>Figure 4 - Lighthouse report for desktop</em>
+  <em>Figure 8 - Lighthouse report for desktop</em>
 </p>
 
 ## Summary and Reflection
 
 ### Extras!
+<p align="right">
+  <img width="200" height="160" src="images/ss-newspaper-extra-extra.png">
+</p>
+
 |                |                    |
 |-|-------------------------------|
 |Small|custom favicon, custom page title, logout button, sorted room names, logo, login background image            |
@@ -99,6 +139,9 @@ While there weren't any automated tests, **manual functional tests** were perfor
 > * **gcpServer.js** gets used for cloud deployment. It is the original with GCP additions.
 
 ### Refactoring opportunities (aka: "do-overs")
+<p align="left">
+  <img width="200" height="200" src="images/ss-emoji-thinking.png">
+</p>
 1. While the data fetching was controlled very smoothly via promises, **the UX of the wait during the initial data fetching** could have been designed better. The initial load of the chatroom view must wait on a few async API tasks to complete, and the timeout for bad response was put in the Chatroom component because that was immediately where the data-fetching was happening. So during that delay, the user sees a partial chatroom screen with no data. A better design would have been to offload the data-fetching to a new, "API" component, and keep the user at the login view/component until the initial data fetching resolved. Heck, even fetching the data immediately when the app loaded, and not waiting for the user to log in, would have been much better for performance and usability, because the same APIs are always fetched regardless of username submitted.
 
 2. **Websockets on a cloud deployment** could be re-thought. In the end I could not get websockets running on GCP, only on localhost. And this was an accomplishment indeed. But outside of my local machine, networking security is a complex and serious thing. What is allowed and how many configuration knobs there are to do it is cloud provider dependent. I played with different environments like "standard" and "flex" and I toggled on session affinity, but no luck. GCP was chosen for cloud hosting and then socket.io was added later. There may be another cloud provider with infrastructure that runs websockets more more easily of the box. Or maybe a using a different client library would work better on GCP.
