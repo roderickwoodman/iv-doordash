@@ -31,6 +31,10 @@ Your second terminal window should now be showing the output:
 >Local:            http://localhost:8844</pre>
 Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app!
 
+### Confirming a server connection
+When running locally (but not on the Internet deployment), please open your browser's console to confirm that the websocket connection to the server is up. This will enable new chat messages from one client connection to be pushed to all others, so that the browser does not have to be manually refreshed every time another client posts a new message to the chatroom. You should see something like this on the console when the app initially loads:
+>Connected to the server as part of 3 total clients. [http://localhost:8080]
+
 ## OR, Connecting to the App LIVE on the Internet!
  
 ### Browser requirements
@@ -123,17 +127,18 @@ While there weren't any automated tests, **manual functional tests** were perfor
 ## Summary and Reflection
 
 ### Extras!
-
+The following features were not required, but were added anyways because they make a better product overall.
 <img align="right" width="200" height="160" src="images/ss-newspaper-extra-extra.png">
 | Size    | Extra Features                                                                                    |
 |---------|---------------------------------------------------------------------------------------------------|
 | small   | custom favicon, custom page title, logout button, sorted room names, logo, login background image |
 | mmedium | login validation, persistent user state, login timeout failover, responsive 2nd layout            |
-| large   | cloud-deployed! sockets! (but not both working together)   
+| large   | cloud-deployed! sockets! (but not both working together)                                          |
 
-> NOTE:  Technically, I now have two different Express server files:
-> * **server.js** gets used for localhost. It is the original with sockets additions.
-> * **gcpServer.js** gets used for cloud deployment. It is the original with GCP additions.
+### Server files
+Note, in order to get sockets and cloud deployment to work, I needed to make additions to the original server file. I kept everything including the APIs untouched, but I did end up adding several new lines of code...
+* **server.js** gets used for localhost. It is a superset of the original, with additions to enable sockets.
+* **gcpServer.js** gets used for cloud deployment. It is a superset of the original, with 'path' joining added in order to integrate the React front end build files with the server, allowing both to be started on the same machine.
 
 ### Refactoring opportunities (aka: "do-overs")
 <img align="left" width="200" height="200" src="images/ss-emoji-thinking.png">
