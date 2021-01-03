@@ -19,21 +19,36 @@ Now, in the first terminal window, type:
 	> npm install
 	> npm run api-server
 
+And verify this response:
+
+><pre> > iv-doordash-FE@1.0.0 api-server
+> > node server.js
+>
+> API running at localhost:8080/api</pre>
+
 And in a second terminal window, type:
 
 	> cd <the extracted iv-doordash-main folder> 
 	> npm run client
 
-### Viewing in the browser
-Your second terminal window should now be showing the output:
+And verify this response:
+
 ><pre>Compiled successfully!
+>
 >You can now view iv-doordash-FE in the browser.
->Local:            http://localhost:8844</pre>
+>
+>  Local:            http://localhost:8844
+>  On Your Network:  http://192.168.1.72:8844
+>
+>Note that the development build is not optimized.
+>To create a production build, use yarn build.</pre>
+
+### Viewing in the browser
 Finally, point your browser to  http://localhost:8844 to see the **DD-Chat** app!
 
 ### Confirming a server connection
 When running locally (but not on the Internet deployment), please open your browser's console to confirm that the websocket connection to the server is up. This will enable new chat messages from one client connection to be pushed to all others, so that the browser does not have to be manually refreshed every time another client posts a new message to the chatroom. You should see something like this on the console when the app initially loads:
->Connected to the server as part of 3 total clients. [http://localhost:8080]
+><pre>Connected to the server as part of 3 total clients. [http://localhost:8080]</pre>
 
 ## OR, Connecting to the App LIVE on the Internet!
  

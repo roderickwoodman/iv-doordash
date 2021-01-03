@@ -115,12 +115,15 @@ router.route('/rooms/:roomId/messages')
   })
 
 app.use('/api', router)
+
+/* Custom additions to the original server.js, for websockets */
+
 // app.listen(port)
 // console.log(`API running at localhost:${port}/api`)
 
 var http = require('http').createServer(app)
 http.listen(port, () => {
-  console.log(`listening on *:${port}`)
+  console.log(`API running at localhost:${port}/api`)
 })
 var io = require('socket.io')(http)
 
@@ -158,3 +161,4 @@ io.on('connection', (socket) => {
   })
 
 })
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
