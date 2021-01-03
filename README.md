@@ -84,10 +84,10 @@ The **chatroom view on narrow screens** looks similar to the wide version. Howev
 A modern, **component-based architecture** is essential for maintainability and extensibility. And because this application had a one-directional user flow in addition to a very limited data flow between only 2 views, it made sense to have the two views be more presentational style components ("Login" and "Chatroom") that were children under a more container-like, parent component ("App"). With this definition, not much data would need to be shared between these **3 primary components**, producing minimal coupling.
 
 <p align="center">
-  <img width="600" height="458" src="images/ss-component-sketch.jpg">
+  <img width="350" height="171" src="images/ss-component-inspector.png">
 </p>
 <p align="center">
-  <em>Figure 5 - Component architecture sketch</em>
+  <em>Figure 5 - Component architecture</em>
 </p>
 
 ### Micro code structure
@@ -123,9 +123,6 @@ While there weren't any automated tests, **manual functional tests** were perfor
 ## Summary and Reflection
 
 ### Extras!
-<p align="right">
-  <img width="200" height="160" src="images/ss-newspaper-extra-extra.png">
-</p>
 
 |                |                    |
 |-|-------------------------------|
@@ -133,6 +130,9 @@ While there weren't any automated tests, **manual functional tests** were perfor
 |Medium          |login validation, persistent user state, login timeout failover, responsive 2nd layout           |
 |Large          |cloud-deployed! sockets! (but not both working together)|
 ||
+<p align="right">
+  <img width="200" height="160" src="images/ss-newspaper-extra-extra.png">
+</p>
 
 > NOTE:  Technically, I now have two different Express server files:
 > * **server.js** gets used for localhost. It is the original with sockets additions.
@@ -144,6 +144,6 @@ While there weren't any automated tests, **manual functional tests** were perfor
 </p>
 1. While the data fetching was controlled very smoothly via promises, **the UX of the wait during the initial data fetching** could have been designed better. The initial load of the chatroom view must wait on a few async API tasks to complete, and the timeout for bad response was put in the Chatroom component because that was immediately where the data-fetching was happening. So during that delay, the user sees a partial chatroom screen with no data. A better design would have been to offload the data-fetching to a new, "API" component, and keep the user at the login view/component until the initial data fetching resolved. Heck, even fetching the data immediately when the app loaded, and not waiting for the user to log in, would have been much better for performance and usability, because the same APIs are always fetched regardless of username submitted.
 
-2. **Websockets on a cloud deployment** could be re-thought. In the end I could not get websockets running on GCP, only on localhost. And this was an accomplishment indeed. But outside of my local machine, networking security is a complex and serious thing. What is allowed and how many configuration knobs there are to do it is cloud provider dependent. I played with different environments like "standard" and "flex" and I toggled on session affinity, but no luck. GCP was chosen for cloud hosting and then socket.io was added later. There may be another cloud provider with infrastructure that runs websockets more more easily of the box. Or maybe a using a different client library would work better on GCP.
+2. **Websockets on a cloud deployment** is not yet working. Getting websockets running on localhost was an accompishment, but getting websockets running on ishment indeed. But outside of my local machine, networking security is a complex and serious thing. What is allowed and how many configuration knobs there are to do it is cloud provider dependent. I played with different environments like "standard" and "flex" and I toggled on session affinity, but no luck. GCP was chosen for cloud hosting and then socket.io was added later. There may be another cloud provider with infrastructure that runs websockets more more easily of the box. Or maybe a using a different client library would work better on GCP.
 
 3. **Screen sizing on mobile** needs more attention. It was a little frustrating that 100vh did not represent the useable height because of the top bar coverage. So, more precise height calculations are needed in order that the app can be laid out to fill the full useable area on mobile browsers. Too many minor adjustments are needed on mobile, when the whole layout should just snap into place like it does on desktop.
